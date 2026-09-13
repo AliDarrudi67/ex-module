@@ -1,0 +1,50 @@
+.app-input {
+  &__field {
+    @apply relative flex items-center rounded-xl border border-[#003993] bg-gray-900/40 transition-colors;
+  }
+  &--focused &__field {
+    @apply border-amber-500;
+  }
+  &--error &__field {
+    @apply border-red-500;
+  }
+  &--disabled &__field {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  &__control {
+    @apply w-full bg-[#051d43] text-sm text-gray-100 outline-none py-3.5 rounded-xl ps-4 pe-4;
+
+    &--has-left-icon {
+      @apply ps-11;
+    }
+    &--has-right-icon {
+      @apply pe-11;
+    }
+  }
+  &__icon {
+    @apply absolute top-1/2 -translate-y-1/2 text-gray-400;
+    &--left {
+      @apply start-3.5;
+    }
+    &--right {
+      @apply end-3.5 cursor-pointer bg-transparent border-0 p-0 flex items-center;
+    }
+  }
+
+  &__label {
+    @apply absolute start-4 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none transition-all duration-150;
+
+    &--with-icon {
+      @apply start-11;
+    }
+
+    &--floating {
+      @apply -top-2.5 text-xs bg-gray-900 px-1 start-3 text-amber-400 translate-y-0;
+    }
+  }
+
+  &__error {
+    @apply block mt-1.5 text-xs text-red-500;
+  }
+}

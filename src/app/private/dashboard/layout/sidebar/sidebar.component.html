@@ -1,0 +1,44 @@
+<section class="relative p-5 min-h-screen" dir="rtl">
+    <lucide-icon *ngIf="!showInTrade" name="{{sidebarOpen?'chevron-right':'chevron-left'}}" (click)="toggleSidebar()"
+        class="hidden lg:block cursor-pointer absolute left-[5px] z-[99] bg-white rounded-full top-[13px] border border-[#333]"></lucide-icon>
+    <div class="relative bg-[#F8FAFC] dark:bg-[#1E293B] dark:border-[#485464] dark:border p-3 flex flex-col gap-3 rounded-lg p-2"
+        id="sidebarInner">
+
+
+        <a class="flex justyfy-center items-center cursor-pointer">
+            <img src="assets/img/icon/{{sidebarOpen?'logo-full.png':'logo.png'}}" width="150"
+                class="mx-auto hidden lg:block" />
+            <app-icon-close [ngClass]="showInTrade?'':'block lg:hidden'" (click)="hideSidebarMenu()"></app-icon-close>
+        </a>
+
+        <ul class="flex flex-col text-right gap-2">
+            <li *ngFor="let item of sidebarItems">
+                <div (click)="item.children ? toggle(item) : null"
+                    class="flex items-center justify-between cursor-pointer p-2 rounded transition-all">
+                    <div class="flex items-center gap-1">
+                        <lucide-icon [size]="20" [strokeWidth]="1.5" class="!text-[#34d399]" *ngIf="item?.icon"
+                            (mouseenter)="changeSidebar('open')" name="{{item?.icon}}"></lucide-icon>
+                        <span class="text-gray-700 dark:text-white" *ngIf="sidebarOpen">{{ item.title }}</span>
+                    </div>
+                    <lucide-icon [size]="20" [strokeWidth]="1.5" *ngIf="item.children && sidebarOpen"
+                        class="transition-transform duration-300 dark:text-white" [class.rotate-180]="item.open"
+                        name="chevron-down">
+                    </lucide-icon>
+                </div>
+
+                <ul *ngIf="item.children && sidebarOpen"
+                    class="overflow-hidden transition-all duration-300 flex flex-col gap-1"
+                    [style.maxHeight]="item.open ? item.children.length * 50 + 'px' : '0'">
+                    <li *ngFor="let child of item.children"
+                        class="border-gray-300  transform transition-transform duration-200 hover:bg-gray-200 dark:hover:bg-[#334155] dark:hover:font-bold rounded p-1 transform transition-transform duration-300 block py-2"
+                        routerLinkActive="font-bold !text-[#34D399] bg-gray-200 dark:bg-[#334155]">
+                        <a [routerLink]="child.route" class="pr-5 flex items-center gap-2 text-md dark:text-white"
+                            routerLinkActive="font-bold !text-[#34D399] ">
+                            <span *ngIf="sidebarOpen">{{ child.title }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

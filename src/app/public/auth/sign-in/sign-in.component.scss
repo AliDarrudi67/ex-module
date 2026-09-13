@@ -1,0 +1,50 @@
+.login {
+  @apply flex flex-col gap-6 w-full max-w-[90vw] lg:max-w-sm  mx-auto;
+
+  &__row {
+    @apply flex items-center justify-between text-xs;
+  }
+  &__remember {
+    @apply flex items-center gap-1.5 text-gray-300;
+  }
+  &__forgot {
+    @apply text-amber-400 hover:text-amber-300;
+  }
+
+  &__divider {
+    @apply flex items-center gap-3 text-xs text-gray-500;
+    &-line {
+      @apply flex-1 h-px bg-gray-700;
+    }
+  }
+
+  &__tagline {
+    @apply flex flex-col items-center gap-2 mt-2;
+    &-rule {
+      @apply w-full h-px bg-gray-800;
+    }
+    &-text {
+      @apply flex items-center gap-2 text-[10px] tracking-wider text-gray-500;
+    }
+    &-pipe {
+      @apply text-gray-700;
+    }
+  }
+}
+@media (max-width: 348px) {
+  .login__tagline-text {
+    gap: 0;
+  }
+}
+@media (max-width: 372px) {
+  .login__tagline-pipe {
+    display: none;
+  }
+}
+@media (max-width: 355px) {
+  .login__row {
+    flex-direction: column;
+    gap: 10px;
+    align-items: start;
+  }
+}

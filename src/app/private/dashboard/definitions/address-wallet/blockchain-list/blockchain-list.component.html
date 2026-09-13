@@ -1,0 +1,9 @@
+<div class="relative" [ngClass]="chains.length > 0?'mt-5':'opacity-0'">
+  <app-slider [itemsCount]="chains.length">
+    <div
+      class="swiper-slide transition-all duration-300 bg-white dark:bg-transparent border border-gray-100 shadow-sm hover:shadow-lg dark:hover:bg-[#334155] rounded-xl p-4 text-center"
+      *ngFor="let item of chains">
+      <div class="font-medium text-gray-700 dark:text-white">{{ item.slug }}</div>
+    </div>
+  </app-slider>
+</div>

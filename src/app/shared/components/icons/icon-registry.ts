@@ -1,0 +1,40 @@
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  ChevronDown,
+  Download,
+  Eye,
+  EyeOff,
+  Filter,
+  Lock,
+  LucideIconData,
+  Pencil,
+  Plus,
+  Search,
+  Trash2,
+  Upload,
+  User,
+  X,
+} from 'lucide-angular';
+
+export const ICON_REGISTRY: Record<string, LucideIconData> = {
+  plus: Plus,
+  trash: Trash2,
+  edit: Pencil,
+  search: Search,
+  close: X,
+  check: Check,
+  'arrow-right': ArrowRight,
+  'arrow-left': ArrowLeft,
+  user: User,
+  lock: Lock,
+  eye: Eye,
+  'eye-off': EyeOff,
+  download: Download,
+  upload: Upload,
+  filter: Filter,
+  'chevron-down': ChevronDown,
+};
+
+export type IconName = keyof typeof ICON_REGISTRY;

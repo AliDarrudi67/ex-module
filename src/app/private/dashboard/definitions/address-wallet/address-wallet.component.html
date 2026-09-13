@@ -1,0 +1,6 @@
+<div class="flex flex-col gap-5">
+    <app-evm-list (selectedEvm)="setEvmId($event)"></app-evm-list>
+
+    <app-grid [filter]="filter" *ngIf="evmId" entity="addressWallet" [columns]="columns" [noDelete]="true"
+        (newRecord)="addNewRecord()" (editRecord)="editRecord($event)" [listEndpoint]="listEndpoint"></app-grid>
+</div>

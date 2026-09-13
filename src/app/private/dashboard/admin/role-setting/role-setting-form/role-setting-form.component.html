@@ -1,0 +1,19 @@
+<app-form-container [title]="formTitle" [formLoading]="formLoading">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5"
+        [ngClass]="formLoading?'disabled-form':''">
+
+        <app-async-select [placeholder]="'انتخاب نقش'" [direction]="'rtl'" [searchField]="'slug'" textField="slug"
+            [valueField]="'roleId'" (onSelectItem)="form.value.roleId=$event"
+            [endpoint]="rolesPagination"></app-async-select>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نوع نقش</mat-label>
+            <mat-select matInput formControlName="roleType">
+                <mat-option *ngFor="let item of roleTypes" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-form-footer [form]="form" [loading]="loading"></app-form-footer>
+    </form>
+
+</app-form-container>

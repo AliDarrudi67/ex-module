@@ -1,0 +1,23 @@
+<mat-form-field class="w-full" appearance="outline">
+  <mat-label>{{ placeholder }}</mat-label>
+
+  <mat-select #select (openedChange)="onOpened()" [dir]="direction" (selectionChange)="setSelectedItem($event)">
+    <!-- فیلد جستجو -->
+    <input [dir]="direction" [placeholder]="direction=='rtl'?'جستجو ...':'Search ...'" (input)="onSearch($event)"
+      (click)="$event.stopPropagation()"
+      class="w-full border-b border-gray-300 focus:outline-none py-4 px-2 dark:bg-transparent dark:text-white dark:border-[#fff] mb-2" />
+
+    <!-- گزینه‌ها -->
+    <mat-option *ngFor="let option of options" [value]="option[valueField]">
+      <span class="dark:text-white">{{ option[textField] }}</span>
+    </mat-option>
+
+    <!-- وضعیت بارگذاری -->
+    <mat-option *ngIf="loading" disabled>
+      <span class="dark:text-white">در حال بارگذاری...</span>
+    </mat-option>
+    <mat-option *ngIf="!loading && !options.length" disabled>
+      <span class="dark:text-white">موردی یافت نشد</span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

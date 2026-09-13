@@ -1,0 +1,9 @@
+.box::after {
+  position: absolute;
+  content: "";
+  right: 13px;
+  top: 0;
+  background-color: #fff;
+  height: 100%;
+  width: 1px;
+}

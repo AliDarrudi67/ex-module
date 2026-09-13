@@ -1,0 +1,10 @@
+::ng-deep {
+  .mdc-tooltip__surface {
+    font-family: yekan !important;
+    max-width: unset !important;
+    background-color: #fff !important;
+    color: #333 !important;
+    padding: 15px !important;
+    border:1px solid #ccc
+  }
+}

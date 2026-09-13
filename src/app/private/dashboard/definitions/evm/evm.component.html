@@ -1,0 +1,9 @@
+<ng-template #evmButton let-row>
+  <app-button classList="!min-w-[unset]" title="بلاکچین"
+    routerLink="/dashboard/definitions/evm/{{row?.evmId}}/blockchain"></app-button>
+</ng-template>
+
+<app-grid entity="evm" listEndpoint="{{listEndpoint}}" deleteEndpoint="{{deleteEndpoint}}"
+  [columns]="columns" (newRecord)="addNewRecord()"
+  (editRecord)="editRecord($event)" [columnTemplates]="{ 'op': [evmButton]}">
+</app-grid>

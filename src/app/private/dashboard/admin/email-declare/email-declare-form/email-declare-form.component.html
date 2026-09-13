@@ -1,0 +1,48 @@
+<app-form-container [title]="formTitle" [formLoading]="formLoading">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-6 p-5"
+        [ngClass]="formLoading ? 'disabled-form' : ''">
+
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>ایمیل</mat-label>
+            <input matInput type="email" formControlName="email" dir="ltr" />
+            <mat-error *ngIf="form.get('email')?.hasError('required')">ایمیل اجباری است</mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('email')">ایمیل معتبر نیست</mat-error>
+        </mat-form-field>
+
+        <!-- Client ID -->
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>شناسه مشتری</mat-label>
+            <input matInput type="text" formControlName="clientId" dir="ltr" />
+            <mat-error *ngIf="form.get('clientId')?.hasError('required')">شناسه مشتری اجباری است</mat-error>
+        </mat-form-field>
+
+        <!-- Client Secret -->
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>رمز مشتری</mat-label>
+            <input matInput type="text" formControlName="clientSecret" dir="ltr" />
+            <mat-error *ngIf="form.get('clientSecret')?.hasError('required')">رمز مشتری اجباری است</mat-error>
+        </mat-form-field>
+
+        <!-- Redirect URL -->
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>آدرس بازگشت</mat-label>
+            <input matInput type="url" formControlName="redirectUrl" dir="ltr" />
+            <mat-error *ngIf="form.get('redirectUrl')?.hasError('required')">آدرس بازگشت اجباری است</mat-error>
+            <mat-error *ngIf="form.get('redirectUrl')?.hasError('pattern')">
+                آدرس وارد شده معتبر نیست. باید یک URL معتبر باشد.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full" *ngIf="data?.smtpCenterId">
+            <mat-label>وضعیت</mat-label>
+            <mat-select matInput formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- فرم فوتر -->
+        <app-form-footer [loading]="loading" [form]="form"></app-form-footer>
+
+    </form>
+</app-form-container>

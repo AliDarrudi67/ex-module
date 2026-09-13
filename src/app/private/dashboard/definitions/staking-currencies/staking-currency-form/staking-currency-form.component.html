@@ -1,0 +1,20 @@
+<app-form-container [title]="formTitle">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+
+        <!-- ارز -->
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>ارز</mat-label>
+            <mat-select matInput formControlName="currency">
+                <mat-option value="BTC">BTC</mat-option>
+                <mat-option value="ETH">ETH</mat-option>
+                <mat-option value="USDT">USDT</mat-option>
+                <mat-option value="BNB">BNB</mat-option>
+                <mat-option value="ADA">ADA</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('currency')?.hasError('required')">ارز اجباری است</mat-error>
+        </mat-form-field>
+
+        <app-form-footer [form]="form"></app-form-footer>
+
+    </form>
+</app-form-container>

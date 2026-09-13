@@ -1,0 +1,51 @@
+<app-form-container [title]="formTitle">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+
+    <!-- کارمزد Maker -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>کارمزد Maker (%)</mat-label>
+      <input matInput numericOnly formControlName="makerFee" />
+      <mat-error *ngIf="form.get('makerFee')?.hasError('required')">کارمزد maker اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- کارمزد Taker -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>کارمزد Taker (%)</mat-label>
+      <input matInput numericOnly formControlName="takerFee" />
+      <mat-error *ngIf="form.get('takerFee')?.hasError('required')">کارمزد taker اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- ارز base -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>ارز base</mat-label>
+      <mat-select matInput formControlName="baseCurrency">
+        <mat-option value="BTC">BTC</mat-option>
+        <mat-option value="USDT">USDT</mat-option>
+        <mat-option value="ETH">ETH</mat-option>
+        <mat-option value="EUR">EUR</mat-option>
+        <mat-option value="USD">USD</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('baseCurrency')?.hasError('required')">ارز base اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- نوع ارز -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>نوع ارز </mat-label>
+      <mat-select matInput formControlName="currencyType">
+        <mat-option value="staking">Staking</mat-option>
+        <mat-option value="free">Free</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('currencyType')?.hasError('required')">نوع ارز اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- اولویت -->
+    <mat-form-field appearance="outline" class="w-full relative">
+      <mat-label>اولویت</mat-label>
+      <input matInput numericOnly formControlName="priority" />
+      <mat-error *ngIf="form.get('priority')?.hasError('required')">اولویت اجباری است</mat-error>
+    </mat-form-field>
+
+    <app-form-footer [form]="form"></app-form-footer>
+
+  </form>
+</app-form-container>

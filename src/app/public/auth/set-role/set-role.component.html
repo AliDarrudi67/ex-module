@@ -1,0 +1,11 @@
+<div class="flex flex-col items-center justify-center min-h-screen dark:bg-[#1E293B] relative" dir="rtl">
+    <div class="bg-white dark:bg-transparent dark:border rounded-xl shadow-xl w-96 p-6">
+        <div class="flex flex-col justify-center items-center space-y-6">
+            <h2 class="text-xl font-bold text-gray-800 text-center dark:text-white">لطفاً نقش خود را انتخاب کنید</h2>
+            <div class="flex flex-col space-y-4">
+                <app-button *ngFor="let role of userRoles" (click)="onRoleSelected(role)" action="submit"
+                    [loading]="loading" title="{{ role?.slug }}"></app-button>
+            </div>
+        </div>
+    </div>
+</div>

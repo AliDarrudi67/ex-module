@@ -1,0 +1,23 @@
+<ng-template let-row #currencyPairButton>
+    <app-button title="جفت ارز" classList="!min-w-[auto]"
+        routerLink="/dashboard/admin/account-level/{{row?.id}}/currency-pair"></app-button>
+</ng-template>
+
+<ng-template let-row #depositPolicyButton>
+    <app-button title="تنظیمات" classList="!min-w-[auto] !whitespace-break-spaces"
+        routerLink="/dashboard/admin/account-level/{{row?.id}}/policy-deposit"></app-button>
+</ng-template>
+
+<ng-template let-row #withdrawStandardPolicyButton>
+    <app-button title="تنظیمات" classList="!min-w-[auto] !whitespace-break-spaces"
+        routerLink="/dashboard/admin/account-level/{{row?.id}}/policy-withdraw-standard"></app-button>
+</ng-template>
+
+<ng-template let-row #withdrawSCPolicyButton>
+    <app-button title="تنظیمات" classList="!min-w-[auto] !whitespace-break-spaces"
+        routerLink="/dashboard/admin/account-level/{{row?.id}}/policy-withdraw-sc"></app-button>
+</ng-template>
+
+<app-grid [columns]="columns" (newRecord)="addNewRecord()"
+    (editRecord)="editRecord($event)"
+    [columnTemplates]="{'op':[currencyPairButton],'depositPolicy':[depositPolicyButton],'withdrawStandardPolicy':[withdrawStandardPolicyButton],'withdrawSCPolicy':[withdrawSCPolicyButton]}"></app-grid>

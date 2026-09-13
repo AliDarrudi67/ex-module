@@ -1,0 +1,24 @@
+<div class="p-4 max-h-[80vh] flex flex-col dark:bg-[#1E293B]" dir="rtl">
+  <h2 class="text-lg font-semibold mb-3 dark:text-white">انتخاب آیکن</h2>
+
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <mat-label>جستجو در آیکن‌ها</mat-label>
+    <input matInput [formControl]="searchControl" dir="ltr">
+  </mat-form-field>
+
+  <!-- لودینگ -->
+  <app-loading *ngIf="isLoading"></app-loading>
+
+  <!-- لیست آیکن‌ها -->
+  <div class="overflow-y-auto grid grid-cols-6 gap-3" *ngIf="!isLoading">
+    <div *ngFor="let icon of filteredIcons" (click)="selectIcon(icon)"
+      class="flex flex-col items-center p-2 cursor-pointer rounded-lg hover:bg-gray-200 border dark:border-[#1E293B] dark:hover:border-[#eee] dark:bg-transparent transition">
+      <lucide-icon [name]="icon" class="w-6 h-6 dark:text-white"></lucide-icon>
+      <span class="text-xs mt-1 text-gray-600 text-center truncate w-full dark:text-white">{{ icon }}</span>
+    </div>
+  </div>
+
+  <div class="mt-4 text-right">
+    <app-button action="cancel" (click)="closeDialog()" title="انصراف"></app-button>
+  </div>
+</div>

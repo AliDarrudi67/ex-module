@@ -1,0 +1,32 @@
+<app-form-container [title]="formTitle">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نام سرعت</mat-label>
+            <input matInput type="text" formControlName="slug" />
+            <mat-error *ngIf="form.get('slug')?.hasError('required')">نام سرعت اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>ضریب</mat-label>
+            <input matInput type="text" formControlName="rate" />
+            <mat-error *ngIf="form.get('rate')?.hasError('required')">ضریب سرعت اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نوع سرعت</mat-label>
+            <mat-select matInput formControlName="type">
+                <mat-option *ngFor="let item of speedList" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('type')?.hasError('required')">نوع سرعت اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full custom-input">
+            <mat-label>توضیحات</mat-label>
+            <textarea rows="6" matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <app-form-footer [form]="form"></app-form-footer>
+
+    </form>
+</app-form-container>

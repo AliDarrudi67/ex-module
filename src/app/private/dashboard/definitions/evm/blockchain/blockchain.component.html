@@ -1,0 +1,9 @@
+<ng-template #architectureButton let-row>
+  <app-button classList="!min-w-[unset]" title="معماری"
+    routerLink="/dashboard/definitions/evm/{{evmId}}/blockchain/{{row?.chainId}}/architecture"></app-button>
+</ng-template>
+
+<app-grid listEndpoint="{{listEndpoint}}" deleteEndpoint="{{deleteEndpoint}}" entity="chain" [columns]="columns"
+  (newRecord)="addNewRecord()" (editRecord)="editRecord($event)"
+  [columnTemplates]="{ 'op': [architectureButton]}">
+</app-grid>

@@ -1,0 +1,15 @@
+::ng-deep {
+  .mat-ripple {
+    border-bottom: 1px solid #ccc !important;
+  }
+  .mat-ripple:last-child {
+    border-bottom: unset !important;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .row-op {
+    // order: -1; /* اولین ستون */
+  }
+}

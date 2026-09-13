@@ -1,0 +1,55 @@
+<app-form-container [title]="formTitle">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نام کاربر</mat-label>
+            <input matInput type="text" formControlName="fullName" />
+            <mat-error *ngIf="form.get('fullName')?.hasError('required')">
+                نام کاربر اجباری است
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نام کاربری</mat-label>
+            <input matInput type="text" formControlName="username" />
+            <mat-error *ngIf="form.get('username')?.hasError('required')">
+                نام کاربری اجباری است
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full relative">
+            <mat-label>رمز عبور</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" name="password" autocomplete="new-password"
+                dir="ltr" class="!pl-[25px]" formControlName="password" />
+            <a (click)="hidePassword = !hidePassword" class="absolute left-[-10px] top-[10px] cursor-pointer">
+                <lucide-icon name="eye" class="dark:text-white" *ngIf="hidePassword"></lucide-icon>
+                <lucide-icon name="eye-off" class="dark:text-white" *ngIf="!hidePassword"></lucide-icon>
+            </a>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>ایمیل</mat-label>
+            <input matInput type="email" formControlName="email" />
+            <mat-error *ngIf="form.get('email')?.hasError('required')">
+                ایمیل اجباری است
+            </mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('email')">
+                ایمیل وارد شده معتبر نیست.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full" *ngIf="data?.userId">
+            <mat-label>وضعیت</mat-label>
+            <mat-select formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item.value">
+                    {{item.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-async-select [placeholder]="'سطح کاربری'" [direction]="'rtl'" [searchField]="'slug'" [valueField]="'slug'"
+            (onSelectItem)="form.value.accountLevel=$event" [endpoint]="accountLevelPagination"></app-async-select>
+
+        <app-form-footer [form]="form"></app-form-footer>
+    </form>
+</app-form-container>

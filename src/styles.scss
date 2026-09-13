@@ -1,0 +1,562 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+$my-angular18-project-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+:root {
+  @include mat.all-component-themes($my-angular18-project-theme);
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden !important;
+}
+
+body {
+  margin: 0;
+}
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "quill/dist/quill.snow.css";
+
+.swiper,
+.swiper-wrapper {
+  all: unset; /* پاک کردن resetهای Tailwind */
+}
+.swiper-button-prev,
+.swiper-button-next {
+  svg {
+    fill: transparent !important;
+  }
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #34d399 !important;
+  z-index: 20 !important;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.swiper {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.swiper-wrapper {
+  display: flex !important;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  transition-property: transform;
+  box-sizing: content-box;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  position: relative;
+}
+
+@font-face {
+  font-family: "yekan";
+  src: url("assets/font/IRANYekanXFaNum-Regular.ttf");
+  font-weight: normal;
+  font-display: swap;
+}
+
+*:not(lucide-icon),
+.yekan {
+  font-family: yekan;
+}
+.mat-mdc-menu-item-text,
+.mdc-list-item__primary-text {
+  font-family: yekan !important;
+  text-align: right;
+}
+a:hover {
+  text-decoration: none !important;
+}
+.mat-mdc-form-field-subscript-wrapper {
+  height: 0 !important;
+}
+
+.mat-mdc-menu-content {
+  padding: 0 !important;
+}
+
+.mat-button-custom {
+  border-radius: 8px 8px 0 0 !important;
+}
+
+.mat-elevation-z2,
+.mat-mdc-elevation-specific.mat-elevation-z2 {
+  border-radius: 0 0 8px 8px !important;
+}
+
+.mat-mdc-notch-piece.mdc-notched-outline__notch {
+  border-left: none;
+  border-right: none;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-left: none;
+}
+
+.mat-mdc-form-field:not(.mat-form-field-disabled)
+  .mat-mdc-floating-label.mdc-floating-label {
+  font-size: 14px !important;
+  color: #74777f !important;
+}
+.mdc-text-field {
+  border-radius: 4px !important;
+}
+.mdc-text-field--outlined {
+  background-color: #fff;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 45px !important;
+  padding-bottom: 0px !important;
+  padding-top: 11px !important;
+}
+.mat-mdc-text-field-wrapper
+  .mat-mdc-form-field-flex
+  .mat-mdc-floating-label:not(.mdc-floating-label--float-above) {
+  top: 22px !important;
+}
+
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-right: none !important;
+}
+
+.outlined-button {
+  @apply border border-[#34d399] p-2 rounded-lg shadow-md hover:shadow-lg min-w-[130px] hover:border-emerald-500 transition dark:text-white;
+}
+
+.green-button,
+.greenButton {
+  @apply bg-[#34d399] text-white p-2 rounded-lg shadow-md hover:shadow-lg min-w-[130px] hover:bg-emerald-500 transition;
+}
+.red-button,
+.redButton {
+  @apply bg-red-600 text-white p-2 rounded-lg shadow-md hover:shadow-lg min-w-[130px] hover:bg-red-500 transition;
+}
+.blue-button,
+.blueButton {
+  @apply bg-blue-600 text-white p-2 rounded-lg shadow-md hover:shadow-lg min-w-[130px] hover:bg-blue-500 transition;
+}
+.gray-button,
+.grayButton {
+  @apply bg-gray-200 text-gray-700 p-2 rounded-lg shadow-sm hover:bg-gray-300 min-w-[130px];
+}
+
+.text-green {
+  @apply text-[#34d399];
+}
+.mat-stepper-horizontal {
+  background-color: transparent !important;
+}
+.mat-step-header,
+.mat-step-header:hover,
+.mat-step-header.mat-active,
+.mat-step-header.mat-completed {
+  background-color: unset !important; /* حذف پس‌زمینه */
+}
+
+.mat-ripple-element {
+  display: none !important; /* غیر فعال کردن ripple از طریق CSS */
+}
+.mat-horizontal-stepper-header-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll در موبایل */
+}
+.mat-step-icon-selected {
+  background: #34d399 !important;
+}
+@keyframes dropdownOpen {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes dropdownClose {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-5px);
+  }
+}
+
+.animate-dropdown-open {
+  animation: dropdownOpen 0.15s ease-out forwards;
+}
+
+.animate-dropdown-close {
+  animation: dropdownClose 0.15s ease-in forwards;
+}
+@keyframes fade-scale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-rotate {
+  0% {
+    opacity: 0;
+    transform: rotateX(-10deg) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg) translateY(0);
+  }
+}
+
+router-outlet + * {
+  display: block;
+  animation: fade-rotate 0.5s ease-out;
+  transform-origin: top;
+}
+
+// router-outlet + * {
+//   display: block;
+//   animation: fade-scale 0.4s ease-out;
+// }
+
+a:hover {
+  text-decoration: none !important;
+}
+
+.cdk-overlay-backdrop {
+  background-color: rgba(
+    163,
+    175,
+    169,
+    0.3
+  ) !important; /* بک‌گراند نیمه‌شفاف */
+  backdrop-filter: blur(1px) !important; /* افکت بلور */
+  -webkit-backdrop-filter: blur(1px) !important; /* برای سازگاری با Safari */
+  transition: backdrop-filter 0.3s ease !important;
+}
+
+.mat-mdc-dialog-surface {
+  border-radius: 15px !important;
+}
+.mat-mdc-notch-piece {
+  border-color: #eee !important;
+}
+// .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(
+//     .mdc-text-field--focused
+//   )
+//   :not(.ng-invalid):hover
+//   .mat-mdc-notch-piece {
+//   border-color: #34d399; /* سبز */
+//   border-width: 2px !important;
+// }
+
+// .mdc-text-field--outlined:not(
+//     .mdc-text-field--disabled
+//   ).mdc-text-field--invalid:not(.mdc-text-field--focused):hover
+//   .mdc-notched-outline
+//   .mat-mdc-notch-piece {
+//   border-color: inherit !important; /* سبز */
+// }
+// /* وقتی فرم فیلد خطا دارد */
+// .mdc-text-field.mdc-text-field--invalid.mdc-text-field--focused
+//   .mdc-notched-outline__leading,
+// .mdc-text-field.mdc-text-field--invalid.mdc-text-field--focused
+//   .mdc-notched-outline__notch,
+// .mdc-text-field.mdc-text-field--invalid.mdc-text-field--focused
+//   .mdc-notched-outline__trailing {
+//   border-color: #ba1a1a; /* قرمز */
+//   border-width: 2px !important;
+// }
+
+// /* وقتی فرم فیلد معتبر است و فوکوس دارد */
+// .mdc-text-field.mdc-text-field--valid.mdc-text-field--focused
+//   .mdc-notched-outline__leading,
+// .mdc-text-field.mdc-text-field--valid.mdc-text-field--focused
+//   .mdc-notched-outline__notch,
+// .mdc-text-field.mdc-text-field--valid.mdc-text-field--focused
+//   .mdc-notched-outline__trailing {
+//   border-color: #34d399; /* سبز */
+//   border-width: 2px !important;
+// }
+
+// /* حالت معمولی فوکوس بدون اعتبارسنجی */
+// .mdc-text-field.mdc-text-field--focused .mdc-notched-outline__leading,
+// .mdc-text-field.mdc-text-field--focused .mdc-notched-outline__notch,
+// .mdc-text-field.mdc-text-field--focused .mdc-notched-outline__trailing {
+//   border-width: 2px !important;
+//   border-color: #3b82f6; /* رنگ پیش‌فرض آبی */
+// }
+
+div.mat-mdc-select-panel {
+  padding-top: 0 !important;
+  background-color: #fff !important;
+}
+
+.mat-mdc-menu-content {
+  background-color: #fff !important;
+}
+.mat-elevation-z2,
+.mat-mdc-elevation-specific.mat-elevation-z2 {
+  border-radius: 8px !important;
+  top: 10px;
+  position: relative;
+}
+.mat-mdc-menu-panel {
+  max-width: unset !important;
+}
+.mat-mdc-option.mat-mdc-option-active.mdc-list-item {
+  background-color: #fff !important;
+}
+.dark {
+  .otp-input {
+    background-color: transparent;
+    color: #fff;
+  }
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    color: #bfbfbf !important;
+  }
+  .mat-step-text-label {
+    color: #fff;
+  }
+  .mat-mdc-form-field-error {
+    color: #f39e9e !important;
+  }
+  .mdc-label {
+    color: #fff;
+  }
+  .mdc-checkbox__background {
+    border-color: #fff !important;
+  }
+  .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
+  .mat-horizontal-stepper-header .mat-step-icon {
+    background-color: #34d399 !important;
+  }
+  .dark-hide {
+    display: none;
+  }
+  .dark-show {
+    display: block;
+  }
+  div.mat-mdc-select-panel {
+    padding-top: 0 !important;
+    background-color: #14213d !important;
+  }
+  .mdc-list-item__primary-text {
+    color: #fff;
+  }
+  .mat-mdc-option.mat-mdc-option-active.mdc-list-item {
+    background-color: #14213d !important;
+    border: 1px solid #eee;
+  }
+  .mdc-list-item__primary-text,
+  .mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
+    color: #fff !important;
+  }
+  .mat-mdc-menu-content {
+    background-color: #14213d !important;
+  }
+  .mdc-text-field--outlined {
+    background-color: transparent;
+  }
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mdc-text-field__input {
+    color: #fff !important;
+  }
+  .mat-mdc-select-min-line {
+    color: #fff !important;
+  }
+  .mat-mdc-select-arrow {
+    color: #fff !important;
+  }
+  .mat-calendar {
+    background-color: #1e293b !important;
+    color: #fff !important;
+  }
+  .header-container svg path {
+    stroke: #fff !important;
+  }
+  .mat-calendar-table-header tr th span,
+  .mat-calendar-body-cell-content {
+    color: #fff !important;
+  }
+  .mat-calendar-body-today {
+    border-color: #059669 !important;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    background-color: transparent !important;
+    border: 1px solid #fff;
+  }
+  .mdc-icon-button {
+    svg {
+      fill: #fff;
+    }
+  }
+
+  /* Dark mode wrapper */
+  quill-editor .ql-container,
+  .ql-container {
+    background: #1e1e1e !important;
+    color: #e3e3e3 !important;
+    border-color: #444 !important;
+  }
+
+  /* Editor area */
+  .ql-editor {
+    color: #f1f1f1 !important;
+  }
+
+  .ql-editor.ql-blank::before {
+    color: #888 !important;
+  }
+
+  /* Toolbar */
+  .ql-toolbar {
+    background: #2a2a2a !important;
+    border-color: #444 !important;
+  }
+
+  .ql-toolbar button svg {
+    filter: invert(80%) !important;
+  }
+
+  .ql-toolbar button:hover svg {
+    filter: invert(100%) !important;
+  }
+
+  /* Tooltip (link/video popup) */
+  .ql-tooltip {
+    background: #2a2a2a !important;
+    border-color: #444 !important;
+    color: #fff !important;
+  }
+
+  .ql-tooltip input {
+    background: #1e1e1e !important;
+    color: #fff !important;
+    border-color: #555 !important;
+  }
+  .mdc-evolution-chip__text-label {
+    font-family: yekan !important;
+    color: #fff !important;
+  }
+  .mat-mdc-chip-remove {
+    color: #fff !important;
+  }
+}
+.light {
+  .light-hide {
+    display: none;
+  }
+  .light-show {
+    display: block;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9; /* خاکستری خیلی روشن */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #34d399; /* سبز برند */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #059669; /* سبز تیره‌تر هنگام hover */
+}
+
+.dark::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark::-webkit-scrollbar-track {
+  background: #1e293b; /* پس‌زمینه دارک */
+}
+
+.dark::-webkit-scrollbar-thumb {
+  background-color: #34d399; /* سبز برند */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.dark::-webkit-scrollbar-thumb:hover {
+  background-color: #10b981; /* سبز روشن‌تر برای contrast */
+}
+
+@media (max-width: 1420px) {
+  .mat-step-label {
+    display: none !important;
+  }
+}
+.disabled-form {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.custom-quill .ql-editor {
+  min-height: 6em; /* تقریباً معادل 6 خط */
+  line-height: 1.5em; /* فاصله بین خطوط */
+  direction: rtl;
+  text-align: right;
+}
+.mat-mdc-form-field-type-mat-chip-grid {
+  .mat-mdc-form-field-infix {
+    padding-top: 3px !important;
+  }
+}

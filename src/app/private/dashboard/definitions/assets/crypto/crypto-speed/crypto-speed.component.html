@@ -1,0 +1,8 @@
+<ng-template #withdrawButton let-row>
+  <app-button routerLink="/dashboard/definitions/assets/{{assetId}}/crypto/{{cryptoId}}/speed/{{row?.speedId}}/fees"
+    classList="!min-w-[unset]" title="فی برداشت"></app-button>
+</ng-template>
+
+<app-grid entity="speed" [columns]="columns" (newRecord)="addNewRecord()" (editRecord)="editRecord($event)" [op]="false"
+  [crudButton]="false" [listEndpoint]="listEndpoint" [deleteEndpoint]="deleteEndpoint"
+  [columnTemplates]="{ 'fee': [withdrawButton]}"></app-grid>

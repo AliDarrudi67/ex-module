@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm install --force && ng build --configuration=production",
+  "outputDirectory": "dist/my-angular18-project",
+  "framework": "angular"
+}

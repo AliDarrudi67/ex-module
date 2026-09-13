@@ -1,0 +1,17 @@
+.auth-back {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/assets/img/auth-back.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(8px);
+    transform: scale(1.1); // برای پوشوندن لبه‌های محو شده از blur
+    z-index: -1;
+    background-position: center center;
+  }
+}

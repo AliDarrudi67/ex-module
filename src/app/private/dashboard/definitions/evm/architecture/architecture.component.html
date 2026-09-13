@@ -1,0 +1,7 @@
+<app-grid
+  listEndpoint="{{listEndpoint}}" deleteEndpoint="{{deleteEndpoint}}" entity="arch"
+  [columns]="columns"
+  (newRecord)="addNewRecord()"
+  (editRecord)="editRecord($event)"
+  >
+</app-grid>

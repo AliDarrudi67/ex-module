@@ -1,0 +1,132 @@
+<div class="relative flex flex-col justify-center items-center h-screen bg-[#f8fafc] dark:bg-[#1E293B]">
+    <div class="absolute right-[15px] top-[15px] cursor-pointer">
+        <app-change-mode></app-change-mode>
+    </div>
+    <h2 class="text-2xl font-bold text-center mb-4 text-black dark:text-white ">
+        ویرایش پروفایل
+    </h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" dir="rtl" [ngClass]="loading?'disabled-form':''"
+        class="min-w-[unset] lg:min-w-[700px] border dark:border-white rounded-lg p-2">
+        <div class="flex justify-center" *ngIf="loading">
+            <app-icon-loading></app-icon-loading>
+        </div>
+        <mat-horizontal-stepper [linear]="true" #stepper>
+            <ng-template matStepperIcon="edit">
+                <lucide-icon name="square-pen" size="16"></lucide-icon>
+            </ng-template>
+
+            <ng-template matStepperIcon="done">
+                <lucide-icon name="check-check" size="16"></lucide-icon>
+            </ng-template>
+
+            <ng-template matStepperIcon="number" let-index="index">
+                {{ index + 1 }}
+            </ng-template>
+
+            <!-- Step 1: اطلاعات شخصی -->
+            <mat-step [stepControl]="form.get('personal')!" label="اطلاعات شخصی">
+                <div formGroupName="personal" class="flex flex-col gap-5 mt-4">
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>کد ملی</mat-label>
+                        <input matInput numericOnly formControlName="nationalCode" dir="ltr" />
+                        <mat-error *ngIf="form.get('personal.nationalCode')?.hasError('required')">
+                            کد ملی الزامی است
+                        </mat-error>
+                        <mat-error
+                            *ngIf="form.get('personal.nationalCode')?.value &&  form.get('personal.nationalCode')?.hasError('nationalCodeInvalid')">
+                            کد ملی معتبر نیست
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>نام</mat-label>
+                        <input matInput formControlName="firstName" />
+                        <mat-error *ngIf="form.get('personal.firstName')?.hasError('required')">نام الزامی
+                            است</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>نام خانوادگی</mat-label>
+                        <input matInput formControlName="lastName" />
+                        <mat-error *ngIf="form.get('personal.lastName')?.hasError('required')">نام خانوادگی الزامی
+                            است</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>نام پدر</mat-label>
+                        <input matInput formControlName="father" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>جنسیت</mat-label>
+                        <mat-select formControlName="sex">
+                            <mat-option *ngFor="let item of genderList"
+                                [value]="item?.value">{{item?.text}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="form.get('personal.sex')?.hasError('required')">
+                            جنسیت الزامی است
+                        </mat-error>
+                    </mat-form-field>
+
+                    <app-datepicker [switchToGregorian]="false" (dateSelected)="form.value.personal.birthDate=$event"
+                        [label]="'تاریخ تولد'"></app-datepicker>
+
+                    <div class="flex justify-end mt-4">
+                        <app-button [action]="'button'" [matStepperNext]="true" (click)="touchForm(1)"
+                            title="مرحله بعد"></app-button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <!-- Step 2: اطلاعات تماس -->
+            <mat-step [stepControl]="form.get('contact')!" label="اطلاعات تماس">
+                <div formGroupName="contact" class="flex flex-col gap-5 mt-4">
+                    <app-country-picker (onCountrySelected)="setIsoValue($event)"
+                        [iso3]="form.value.contact.iso3"></app-country-picker>
+                    <small class="mat-mdc-form-field-error" *ngIf="countryError">{{countryError}}</small>
+
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>شهر</mat-label>
+                        <input matInput formControlName="city" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>آدرس</mat-label>
+                        <textarea matInput formControlName="address"></textarea>
+                    </mat-form-field>
+
+                    <div class="flex justify-between mt-2" dir="ltr">
+                        <app-button classList="w-full lg:w-auto" [matStepperNext]="true" (click)="touchForm(2)"
+                            [action]="'button'" title="بعدی"></app-button>
+                        <app-button action="default" title="قبلی" [matStepperPrevious]="true"></app-button>
+                    </div>
+                </div>
+            </mat-step>
+
+            <!-- Step 3: اطلاعات کد دعوت و ذخیره -->
+            <mat-step [stepControl]="form.get('referral')!" label="کد دعوت">
+                <div formGroupName="referral" class="flex flex-col gap-5 mt-4">
+                    <mat-form-field appearance="outline" class="w-full mb-2">
+                        <mat-label>کد دعوت</mat-label>
+                        <input dir="ltr" appNoPersian matInput formControlName="referralCode" />
+                    </mat-form-field>
+
+                    <mat-checkbox formControlName="infoReferral">
+                        نمایش اطلاعات کد دعوت برای بقیه
+                    </mat-checkbox>
+
+                    <div class="flex justify-between mt-2" dir="ltr">
+                        <app-button classList="w-full lg:w-auto" [loading]="formLoading" [matStepperNext]="true"
+                            action="submit" title="ذخیره"></app-button>
+                        <app-button action="default" title="قبلی" [matStepperPrevious]="true"></app-button>
+                    </div>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </form>
+
+    <a class="block text-center dark:text-white mt-2 text-blue-600" *ngIf="canSkipProfile" routerLink="/dashboard">رد
+        کردن</a>
+</div>

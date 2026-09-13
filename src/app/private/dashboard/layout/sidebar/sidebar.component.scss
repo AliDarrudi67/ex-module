@@ -1,0 +1,25 @@
+#sidebarInner {
+  height: calc(100vh - 40px);
+  overflow: auto;
+}
+::ng-deep {
+  .dark {
+    .dark-sidebar {
+      background-image: linear-gradient(
+        to right top,
+        // #34d399,
+        // #00b3a0,
+        #00919b,
+        #006f89,
+        #054f6b,
+        #1a445e,
+        #21394f,
+        #232f41,
+        #273346,
+        #2b384b,
+        #2f3c50,
+        #334155
+      );
+    }
+  }
+}

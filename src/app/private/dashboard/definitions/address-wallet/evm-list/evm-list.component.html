@@ -1,0 +1,26 @@
+<div class="flex flex-col bg-gray-100 dark:bg-[#1E293B] p-3 rounded-lg mb-5" dir="ltr">
+  <!-- 🔹 EVM Swiper -->
+  <div class="flex items-center gap-[20px]">
+    <div
+      class="w-[150px] transition-all duration-300 bg-white hover:border-[#059669] dark:bg-transparent border border-gray-100 shadow-sm hover:shadow-lg rounded-xl p-4 text-center cursor-pointer"
+      [ngClass]="{
+            'bg-[#ecfdf5] shadow-md dark:text-white border-[#059669]': selectedEvmId=='all'
+          }" (click)="setEvmId('all')">
+      <div class="font-semibold text-gray-700 dark:text-white">All Evms</div>
+    </div>
+
+    <div class="w-full overflow-auto">
+      <app-slider [itemsCount]="evms.length">
+        <div
+          class="swiper-slide transition-all duration-300 hover:border-[#059669] bg-white dark:bg-transparent border border-gray-100 shadow-sm hover:shadow-lg rounded-xl p-4 text-center cursor-pointer"
+          [ngClass]="{
+            'bg-[#ecfdf5] shadow-md dark:ring-[#334155] border-[#059669]': item.evmId === selectedEvmId
+          }" (click)="setEvmId(item?.evmId)" *ngFor="let item of evms">
+          <div class="font-semibold text-gray-700 dark:text-white">{{ item.slug }}</div>
+        </div>
+      </app-slider>
+    </div>
+  </div>
+
+  <!-- 🔹 Chain Swiper -->
+  <app-blockchain-list *ngIf="selectedEvmId!=='all'" [evmId]="selectedEvmId"></app-blockchain-list>

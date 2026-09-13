@@ -1,0 +1,80 @@
+:host ::ng-deep {
+  .trading-tabs {
+    .mat-mdc-tab-label-container {
+      flex-grow: unset !important;
+    }
+
+    .mat-mdc-tab-labels {
+      gap: 10px;
+    }
+
+    .mat-mdc-tab-header {
+      border-bottom: 1px solid #333b47;
+    }
+
+    .mat-mdc-tab {
+      font-weight: 500;
+      padding: 7px 13px;
+      flex: 0 0 auto !important; // هر تب به اندازه متنش
+      min-width: 0;
+      margin-bottom: 7px;
+      height: auto;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      // هاور برای تب‌های غیرفعال
+      &:hover:not(.mat-mdc-tab-label-active) {
+        background-color: #374151;
+        border-radius: 0.5rem !important;
+
+        .mdc-tab__text-label {
+          color: #fff !important; // رنگ متن هنگام هاور
+        }
+      }
+    }
+
+    .mat-mdc-tab .mdc-tab__text-label {
+      color: #929aa5;
+    }
+
+    .mat-mdc-tab-label-container {
+      border-bottom: unset !important;
+    }
+
+    .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+      color: #fff;
+    }
+
+    .mat-mdc-tab.mdc-tab--active {
+      background-color: #374151;
+      border-radius: 0.5rem !important;
+    }
+
+    .mat-mdc-tab .mdc-tab__ripple::before,
+    .mat-mdc-tab .mdc-tab__ripple::after {
+      background-color: transparent !important;
+    }
+
+    .mat-mdc-tab .mdc-tab-indicator__content--underline {
+      display: none;
+    }
+
+    .mat-mdc-tab-group {
+      border-bottom: 0px;
+    }
+  }
+}
+
+:host ::ng-deep .mat-mdc-tab-label:last-child {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem; // فاصله متن و آیکن
+}
+
+#sidebar {
+  &.show {
+    transform: translateX(0);
+  }
+  &.hide {
+    transform: translateX(500px);
+  }
+}

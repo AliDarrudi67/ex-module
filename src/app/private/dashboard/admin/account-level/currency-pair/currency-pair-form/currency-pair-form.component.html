@@ -1,0 +1,46 @@
+<app-form-container [title]="formTitle">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+
+    <!-- ارز مبدا -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>ارز مبدا</mat-label>
+      <mat-select matInput formControlName="from">
+        <mat-option value="BTC">BTC</mat-option>
+        <mat-option value="USDT">USDT</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('from')?.hasError('required')">ارز مبدا اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- ارز مقصد -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>ارز مقصد</mat-label>
+      <mat-select matInput formControlName="to">
+        <mat-option value="BTC">BTC</mat-option>
+        <mat-option value="USDT">USDT</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('to')?.hasError('required')">ارز مقصد اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- نوع بازار (radio) -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>نوع بازار</mat-label>
+      <mat-select matInput formControlName="marketType">
+        <mat-option value="OTC">OTC</mat-option>
+        <mat-option value="Spot">Spot</mat-option>
+        <mat-option value="copytrade">Copytrade</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('marketType')?.hasError('required')">نوع بازار اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- ضریب -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>ضریب</mat-label>
+      <input matInput formControlName="rate" numericOnly dir="ltr" />
+      <mat-error *ngIf="form.get('rate')?.hasError('required')">ضریب اجباری است</mat-error>
+    </mat-form-field>
+
+    <app-form-footer [form]="form"></app-form-footer>
+
+  </form>
+</app-form-container>

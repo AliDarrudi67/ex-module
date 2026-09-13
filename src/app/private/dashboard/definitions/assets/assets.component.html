@@ -1,0 +1,16 @@
+<ng-template #cryptoButton let-row>
+  <app-button classList="!min-w-[unset]" title="کریپتو" routerLink="/dashboard/definitions/assets/{{row?.assetId}}/crypto"></app-button>
+</ng-template>
+
+<ng-template #sectionAssetButton let-row>
+  <app-button classList="!min-w-[unset]" title="Section Asset" routerLink="/dashboard/definitions/assets/{{row?.assetId}}/section-asset"></app-button>
+</ng-template>
+
+<app-grid
+  [columns]="columns"
+  (newRecord)="addNewRecord()"
+  (editRecord)="editRecord($event)"
+[columnTemplates]="{ 'crypto': [cryptoButton],'sectionAsset': [sectionAssetButton]}"
+  entity="asset" [listEndpoint]="listEndpoint" [deleteEndpoint]="deleteEndpoint"
+  >
+</app-grid>

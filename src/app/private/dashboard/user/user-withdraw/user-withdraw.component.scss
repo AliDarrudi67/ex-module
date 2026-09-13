@@ -1,0 +1,12 @@
+@media (min-width: 1250px) {
+  #helpBox {
+    position: absolute;
+    left: -330px;
+    width: auto;
+  }
+}
+@media (max-width: 1250px) {
+  #helpBox {
+    width: 100%;
+  }
+}

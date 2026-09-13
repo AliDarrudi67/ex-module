@@ -1,0 +1,45 @@
+#dynamicSection {
+  width: calc(100vw - 328px);
+}
+/* styles.css یا component.scss */
+#dynamicSection::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 60px; /* هم‌اندازه‌ی هدر */
+  pointer-events: none;
+  backdrop-filter: blur(30px);
+  z-index: 9; /* درست زیر هدر */
+}
+
+.rtl-sidebar {
+  z-index: 20;
+}
+
+.rtl-sidebar.open {
+  transform: translateX(0);
+}
+
+@media (min-width: 1024px) {
+  #dynamicSection::before {
+    left: 0;
+    width: 90%;
+  }
+}
+@media (max-width: 991px) {
+  #dynamicSection {
+    width: 100vw;
+  }
+  .rtl-sidebar {
+    transform: translateX(120%);
+  }
+
+  .rtl-sidebar.open {
+    transform: translateX(0);
+  }
+  #dynamicSection::before {
+    height: 73px;
+  }
+}

@@ -1,0 +1,69 @@
+<app-form-container [title]="formTitle" [formLoading]="formLoading">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5"
+    [ngClass]="formLoading?'disabled-form':''" [ngClass]="formLoading?'disabled-form':''">
+
+    <!-- Contract ID اصلی -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Contract ID</mat-label>
+      <input matInput type="text" formControlName="contractId" dir="ltr" />
+      <mat-error *ngIf="form.get('contractId')?.hasError('required')">Contract ID اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- Deposit Contract -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Deposit Contract</mat-label>
+      <input matInput type="text" formControlName="contractIdDeposit" dir="ltr" />
+      <mat-error *ngIf="form.get('contractIdDeposit')?.hasError('required')">Deposit Contract اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- Withdraw Contract -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Withdraw Contract</mat-label>
+      <input matInput type="text" formControlName="contractIdWithdraw" dir="ltr" />
+      <mat-error *ngIf="form.get('contractIdWithdraw')?.hasError('required')">Withdraw Contract اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- اعشار -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>اعشار</mat-label>
+      <input matInput numericOnly formControlName="decimal" dir="ltr" />
+      <mat-error *ngIf="form.get('decimal')?.hasError('required')">اعشار اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- محاسبه اعشار -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>محاسبه اعشار</mat-label>
+      <input matInput numericOnly formControlName="decimalCalc" dir="ltr" />
+      <mat-error *ngIf="form.get('decimalCalc')?.hasError('required')">محاسبه اعشار اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- بلاکچین -->
+    <app-async-select searchField="slug" direction="ltr" endpoint="{{chainPagination}}" valueField="chainId"
+      textField="slug" (onSelectItem)="getArchitectures($event)" placeholder="Blockchain"></app-async-select>
+
+    <!-- معماری -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>معماری</mat-label>
+      <mat-select matInput formControlName="archId">
+        <mat-option *ngFor="let item of architectures" [value]="item?.archId">{{item?.slug}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('archId')?.hasError('required')">معماری اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- وضعیت -->
+    <mat-form-field appearance="outline" class="w-full" *ngIf="data?.cryptoId">
+      <mat-label>وضعیت</mat-label>
+      <mat-select matInput formControlName="status">
+        <mat-option *ngFor="let item of statusList" [value]="item.value">{{item.text}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.hasError('required')">وضعیت اجباری است</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox color="primary" formControlName="isNative">
+      ارز بومی؟
+    </mat-checkbox>
+
+    <app-form-footer [loading]="loading" [form]="form"></app-form-footer>
+
+  </form>
+</app-form-container>

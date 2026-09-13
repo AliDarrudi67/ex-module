@@ -1,0 +1,63 @@
+<div
+  class="rounded-xl shadow-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-[#1E293B] overflow-hidden transition-all duration-300"
+  dir="rtl">
+  <!-- Header -->
+  <div
+    class="flex items-center justify-between px-5 py-4 bg-[#34D399]/10 dark:bg-[#334155] border-b border-gray-200 dark:border-slate-700">
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">
+      کیف‌ پول‌های من
+    </h2>
+
+    <button (click)="closeDialog()"
+      class="text-gray-500 hover:text-red-500 dark:text-gray-400 transition-all duration-200" title="بستن">
+      ✕
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full text-sm text-right">
+      <thead class="dark:bg-[#334155] text-gray-700 dark:text-gray-300">
+        <tr>
+          <th class="py-3 px-4 font-semibold">نام کیف‌ پول</th>
+          <th class="py-3 px-4 font-semibold">نوع</th>
+          <th class="py-3 px-4 font-semibold text-center">وضعیت</th>
+          <th class="py-3 px-4 font-semibold text-center">مبلغ</th>
+          <th class="py-3 px-4 font-semibold text-center">مسدود شده</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let wallet of wallets; let i = index"
+          class="border-t border-gray-100 dark:border-slate-700 hover:bg-[#34D399]/5 dark:hover:bg-[#334155]/80 transition-all duration-300">
+          <td class="py-3 px-4 font-medium text-gray-800 dark:text-gray-100">
+            {{ wallet.slug }}
+          </td>
+
+          <td class="py-3 px-4 text-gray-600 dark:text-gray-400">
+            {{ wallet.type.replace('_', ' ') }}
+          </td>
+
+          <td class="py-3 px-4 text-center">
+            <span class="px-3 py-1 rounded-full text-xs font-medium" [ngClass]="{
+                'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300':
+                  wallet.status === 'ACTIVE',
+                'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300':
+                  wallet.status !== 'ACTIVE'
+              }">
+              {{ wallet.status }}
+            </span>
+          </td>
+
+          <td class="py-3 px-4 text-center text-[#34D399] font-semibold">
+            {{ wallet.amount }}
+          </td>
+
+          <td class="py-3 px-4 text-center text-gray-500 dark:text-gray-400">
+            {{ wallet.suspend }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+::ng-deep {
+  .mat-accordion .mat-expansion-panel {
+    margin-bottom: 20px;
+    border-radius: 10px !important;
+    background-color: #dddee2;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2),
+      0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 1px 1px 0px rgba(0, 0, 0, 0.12) !important;
+  }
+  .dark {
+    .mat-accordion .mat-expansion-panel {
+      background-color: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+    }
+    .mat-expansion-indicator svg {
+      fill: #fff;
+    }
+  }
+}

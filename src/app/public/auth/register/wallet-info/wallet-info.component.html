@@ -1,0 +1,44 @@
+<div class="bg-[#f8fafc] dark:bg-[#1E293B] dark:border-[#485464] dark:border p-6" dir="rtl">
+    <!-- Header -->
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white text-center">
+        جزئیات کیف پول
+    </h2>
+
+    <!-- Wallet Address -->
+    <div class="flex flex-col mb-5">
+        <label class="text-gray-600 dark:text-white text-sm mb-1">آدرس کیف پول</label>
+        <div
+            class="flex items-center justify-between bg-gray-100 dark:bg-transparent border border-gray-300 rounded-xl px-3 py-2 gap-3 hover:bg-gray-50 transition-all duration-200">
+            <span class="text-gray-800 dark:text-white text-sm break-all">
+                {{ walletConnectService.walletDetailsObject.walletAddress }}
+            </span>
+            <button type="button" class="p-1 hover:bg-gray-200 rounded-lg transition"
+                (click)="mainService.copyToClipboard(walletConnectService.walletAddress)" title="کپی آدرس">
+                <lucide-icon class="text-gray-600 dark:text-white text-lg" name="copy"></lucide-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- Network -->
+    <div class="flex flex-col mb-4">
+        <label class="text-gray-600 dark:text-white text-sm mb-1">شبکه</label>
+        <span
+            class="text-gray-800 dark:text-white text-sm bg-gray-100 dark:bg-transparent border border-gray-300 rounded-xl px-3 py-2">
+            {{ walletConnectService.walletDetailsObject.networkName || "نامشخص" }}
+        </span>
+    </div>
+
+    <!-- Chain ID -->
+    <div class="flex flex-col mb-6">
+        <label class="text-gray-600 dark:text-white text-sm mb-1">Chain ID</label>
+        <span
+            class="text-gray-800 dark:text-white text-sm bg-gray-100 dark:bg-transparent border border-gray-300 rounded-xl px-3 py-2">
+            {{ walletConnectService.walletDetailsObject.chainId || "نامشخص" }}
+        </span>
+    </div>
+
+    <div class="flex items-center justify-between">
+        <app-button classList="w-full" (click)="setRole()" title="ورود به داشبورد"></app-button>
+        <app-button classList="w-full" (click)="closeDialog()" action="cancel" title="انصراف"></app-button>
+    </div>
+</div>

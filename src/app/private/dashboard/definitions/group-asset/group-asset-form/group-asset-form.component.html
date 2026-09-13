@@ -1,0 +1,25 @@
+<app-form-container [title]="formTitle" [formLoading]="formLoading">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5"
+        [ngClass]="formLoading?'disabled-form':''">
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نام گروه</mat-label>
+            <input matInput type="text" formControlName="slug" dir="ltr" />
+            <mat-error *ngIf="form.get('slug')?.hasError('required')">نام گروه اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full" *ngIf="data?.groupAssetId">
+            <mat-label>وضعیت</mat-label>
+            <mat-select matInput formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-checkbox color="primary" formControlName="isDefault">
+            پیش فرض؟
+        </mat-checkbox>
+
+        <app-form-footer [form]="form" [loading]="loading"></app-form-footer>
+    </form>
+
+</app-form-container>

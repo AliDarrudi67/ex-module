@@ -1,0 +1,77 @@
+<div class="text-gray-800 flex items-start justify-center lg:p-8 mb-5 lg:mb-0" dir="rtl">
+    <div class="w-full lg:max-w-md bg-white dark:bg-[#1E293B] lg:min-h-[520px] rounded-2xl shadow-md p-6 flex flex-col justify-between">
+        <!-- Tabs -->
+        <div class="flex items-center justify-between mb-6 gap-3">
+            <div class="flex rounded-xl border border-[#333] dark:border-[#fff] p-1 flex-1">
+                <button
+                    class="px-4 py-2 rounded-xl text-[#333] dark:text-white w-6/12 method-button relative transition-all duration-500"
+                    (click)="changeMethod('buy')" [ngClass]="method=='buy'?'active-buy':''">خرید</button>
+                <button
+                    class="px-4 py-2 rounded-xl text-[#333] dark:text-white w-6/12 method-button relative transition-all duration-500"
+                    (click)="changeMethod('sell')" [ngClass]="method=='sell'?'active-sell':''">فروش</button>
+            </div>
+
+            <button mat-button [matMenuTriggerFor]="irtMenu" class="flex items-center gap-1" dir="ltr">
+                <app-icon-toman></app-icon-toman>
+                <span class="dark:text-white">IRT</span>
+                <app-icon-arrow-down></app-icon-arrow-down>
+            </button>
+
+            <mat-menu #irtMenu="matMenu" class="rounded-lg overflow-hidden">
+                <button mat-menu-item>
+                    <div class="flex items-center gap-1">
+                        <app-icon-btc></app-icon-btc>
+                        <span class="dark:text-white">BTC</span>
+                    </div>
+                </button>
+            </mat-menu>
+        </div>
+
+
+        <!-- Input section -->
+        <div class="space-y-4">
+            <button class="flex bg-[#EEEEEE] dark:bg-transparent dark:border dark:border-[#fff] w-full px-3 py-4 rounded-lg" (click)="showCurrencies()" dir="ltr">
+                <div class="flex justify-between gap-1 w-full">
+                    <div class="flex items-center gap-2">
+                        <app-icon-arrow-down-gray></app-icon-arrow-down-gray>
+                        <span class="font-bold dark:text-white">109,870</span>
+                        <span class="text-[#848484]">IRT</span>
+                    </div>
+                    <div class="flex items-center gap-2" dir="rtl">
+                        <app-icon-teter></app-icon-teter>
+                        <span class="font-bold dark:text-white">USDT</span>
+                        <span class="text-[#848484]">تتر</span>
+                    </div>
+                </div>
+            </button>
+
+            <div class="rounded-lg bg-[#EEEEEE] dark:bg-transparent dark:border dark:border-[#fff] px-3 py-4 flex flex-col gap-2">
+                <div class="relative">
+                    <input type="text" [(ngModel)]="price" placeholder="90,000 ~ 1,000,000,000" numericOnly class="p-3 w-full bg-transparent border-b border-b-[#333]
+         focus:outline-none focus:ring-0" dir="ltr" />
+                    <div class="flex items-center gap-2 absolute right-0 top-[5px]">
+                        <app-icon-swap></app-icon-swap>
+                        <span class="dark:text-white">IRT</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between" dir="ltr">
+                    <p class="dark:text-white">≈ 0.00 USDT</p>
+                    <p class="text-[#00CC85] font-bold">خرید با همه موجودی</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-between gap-3 mt-5 lg:mt-[200px]">
+            <app-button action="submit" title="خرید" icon="zap" classList="!w-full !p-3 !justify-center"
+                class="w-full flex-1">
+            </app-button>
+            <div class="flex flex-col justify-center items-center bg-[#daf4ee] w-[48px] h-[48px] rounded-lg">
+                <app-icon-chart></app-icon-chart>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<app-faq></app-faq>

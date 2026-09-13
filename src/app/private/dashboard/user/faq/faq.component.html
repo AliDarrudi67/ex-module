@@ -1,0 +1,30 @@
+<section class="max-w-7xl mx-auto flex flex-col gap-5">
+    <div class="flex flex-col items-start">
+        <h2 class="text-[24px] font-bold dark:text-white">
+            {{short?'سوالات متداول':'سؤالات متداول در خرید آسان'}}
+        </h2>
+        <div class="flex flex-col gap-3 w-full" *ngIf="!short">
+            <!-- متن -->
+            <span class="text-[14px] font-medium mt-[20px] dark:text-white">سفارش آنی</span>
+
+            <div class="flex flex-col gap-[2px]">
+                <!-- خط سبز پررنگ 50px -->
+                <div class="w-[30px] h-2 relative right-[8px] bg-[#00cc85] rounded-full"></div>
+
+                <!-- خط خاکستری سراسری -->
+                <div class="w-full h-px bg-gray-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <mat-accordion class="w-full">
+        <mat-expansion-panel *ngFor="let item of items">
+            <mat-expansion-panel-header>
+                <span>{{item.title}}</span>
+            </mat-expansion-panel-header>
+            <div class="px-4 py-2">
+                {{item.content}}
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>

@@ -1,0 +1,4 @@
+<div class="flex justify-between">
+    <app-button [loading]="loading" action="submit"></app-button>
+    <app-button title="{{isInDialog?'انصراف':'بازگشت'}}" (click)="onCancel()" action="cancel"></app-button>
+</div>

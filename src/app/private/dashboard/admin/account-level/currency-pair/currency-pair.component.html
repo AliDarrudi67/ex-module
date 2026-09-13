@@ -1,0 +1,12 @@
+<ng-template let-row #versionButton>
+    <app-button title="ورژن" classList="!min-w-[auto]"
+        routerLink="/dashboard/admin/account-level/{{accountId}}/currency-pair/{{row.id}}/{{row.to}}/version"></app-button>
+</ng-template>
+
+<ng-template let-row #baseCurrencyButton>
+    <app-button title="ارز base" classList="!min-w-[auto]"
+        routerLink="/dashboard/admin/account-level/{{accountId}}/currency-pair/{{row.id}}/base-currency"></app-button>
+</ng-template>
+
+<app-grid [columns]="columns" (newRecord)="addNewRecord()"
+    (editRecord)="editRecord($event)" [noEdit]="true" [columnTemplates]="{'version':[versionButton],'baseCurrency':[baseCurrencyButton]}"></app-grid>

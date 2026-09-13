@@ -1,0 +1,40 @@
+<div *ngIf="loadPagination">
+    <div class="flex flex-col md:flex-row justify-between items-center bg-gray-50 p-3 rounded-xl select-none mt-5"
+        *ngIf="metaData.itemCount>metaData.limit">
+        <!-- انتخاب تعداد رکوردها -->
+        <div class="mb-3 md:mb-0 flex items-center">
+            <label for="pageSize" class="mr-2 font-medium text-gray-700">نمایش در هر صفحه:</label>
+            <select id="pageSize" [(ngModel)]="pageSize" (change)="changePageSize($event)"
+                class="border border-gray-300 rounded-lg p-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-300">
+                <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+            </select>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination flex justify-center items-center">
+            <!-- دکمه قبلی -->
+            <button (click)="prevPage()" [disabled]="!metaData.hasPreviousPage"
+                class="flex items-center justify-center mx-1 w-9 h-9 rounded-full border border-emerald-300 text-emerald-500 hover:bg-emerald-100 transition"
+                [ngClass]="!metaData.hasPreviousPage ? 'opacity-40 cursor-not-allowed' : ''">
+                <lucide-icon name="chevron-down" class="rotate-[-45deg]"></lucide-icon>
+            </button>
+
+            <!-- شماره صفحات -->
+            <span *ngFor="let page of getDisplayedPages()" (click)="goToPage(page)"
+                class="flex items-center justify-center mx-1 w-9 h-9 rounded-full font-semibold text-[15px] cursor-pointer transition"
+                [ngClass]="page === metaData.page 
+        ? 'bg-emerald-400 text-white shadow-md' 
+        : (page === '...' ? 'cursor-default text-gray-400' : 'text-gray-700 hover:bg-emerald-100 hover:text-emerald-600')">
+                {{ page }}
+            </span>
+
+
+            <!-- دکمه بعدی -->
+            <button (click)="nextPage()" [disabled]="!metaData.hasNextPage"
+                class="flex items-center justify-center mx-1 w-9 h-9 rounded-full border border-emerald-300 text-emerald-500 hover:bg-emerald-100 transition"
+                [ngClass]="!metaData.hasNextPage ? 'opacity-40 cursor-not-allowed' : ''">
+                <lucide-icon name="chevron-down" class="rotate-45"></lucide-icon>
+            </button>
+        </div>
+    </div>
+</div>

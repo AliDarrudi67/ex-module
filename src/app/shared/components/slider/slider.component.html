@@ -1,0 +1,19 @@
+<div class="relative">
+    <div [ngClass]="itemsCount>slidesPerView?'px-[60px]':''">
+        <div class="swiper" #swiper>
+            <div class="swiper-wrapper">
+                <ng-content></ng-content>
+            </div>
+        </div>
+    </div>
+
+    <!-- دکمه‌ها -->
+    <div [ngClass]="itemsCount>slidesPerView?'':'opacity-0'">
+        <div class="swiper-button-next" #nextBtn [ngStyle]="{'width.px': arrowSize,'height.px': arrowSize}">
+            <lucide-icon name="arrow-right"></lucide-icon>
+        </div>
+        <div class="swiper-button-prev" #prevBtn [ngStyle]="{'width.px': arrowSize,'height.px': arrowSize}">
+            <lucide-icon name="arrow-left"></lucide-icon>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<!-- <ng-template #actionRoleButton let-row>
+  <app-button title="نقش عملیاتی"
+    routerLink="/dashboard/definitions/roles/{{row?.roleId}}/action-roles"></app-button>
+</ng-template> -->
+
+<app-grid entity="role" [columns]="columns" (newRecord)="addNewRecord()" (editRecord)="editRecord($event)"
+  [listEndpoint]="listEndpoint" [deleteEndpoint]="deleteEndpoint"></app-grid>

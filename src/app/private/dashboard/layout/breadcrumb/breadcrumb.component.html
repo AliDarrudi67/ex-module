@@ -1,0 +1,11 @@
+<div class="overflow-auto bg-white dark:bg-[#1E293B] rounded-lg shadow-sm border border-gray-200 dark:border-[#485464] p-3">
+  <nav class="flex items-center gap-2 text-[14px] whitespace-nowrap px-2">
+    <ng-container *ngFor="let item of breadcrumbs; let last = last">
+      <a *ngIf="!last" [routerLink]="item.url" class="text-[#10b981] hover:text-[#059669] transition-colors font-medium">
+        {{ item.label }}
+      </a>
+      <span *ngIf="!last" class="text-gray-400">/</span>
+      <span *ngIf="last" class="text-gray-800 font-semibold dark:text-white">{{ item.label }}</span>
+    </ng-container>
+  </nav>
+</div>

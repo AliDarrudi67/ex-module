@@ -1,0 +1,66 @@
+<button *ngIf="!matStepperNext && !matStepperPrevious" type="{{action=='submit'?'submit':'button'}}"
+  class="flex gap-1 items-center {{classList}} group relative inline-flex overflow-hidden" [disabled]="disabled"
+  [ngClass]="{
+    'green-button': (action == 'submit' || action == 'button'),
+    'blue-button': action == 'primary',
+    'red-button': action == 'cancel',
+    'gray-button': action == 'default',
+    'outlined-button': action == 'secondary',
+    'opacity-75': disabled,
+    'justify-center': !icon
+  }">
+  <lucide-icon name="{{icon}}" *ngIf="icon && icon!=='google' && icon!=='wallet'"></lucide-icon>
+  <app-icon-google *ngIf="icon=='google'"></app-icon-google>
+  <img src="assets/img/icon/walletconnect.png" *ngIf="icon=='wallet'" />
+  {{title}}
+  <ng-content></ng-content>
+  <app-icon-loading *ngIf="loading"></app-icon-loading>
+  <div
+    class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+    <div class="relative h-full w-8 bg-white/20"></div>
+  </div>
+</button>
+
+<button *ngIf="matStepperNext" type="{{action=='submit'?'submit':'button'}}"
+  class="flex gap-1 items-center {{classList}} group relative inline-flex overflow-hidden" [disabled]="disabled"
+  matStepperNext [ngClass]="{
+    'green-button': (action == 'submit' || action == 'button'),
+    'blue-button': action == 'primary',
+    'red-button': action == 'cancel',
+    'gray-button': action == 'default',
+    'outlined-button': action == 'secondary',
+    'opacity-75': disabled,
+    'justify-center': !icon
+  }">
+  <lucide-icon name="{{icon}}" *ngIf="icon && icon!=='google' && icon!=='wallet'"></lucide-icon>
+  <app-icon-google *ngIf="icon=='google'"></app-icon-google>
+  <img src="assets/img/icon/walletconnect.png" *ngIf="icon=='wallet'" />
+  {{title}}
+  <app-icon-loading *ngIf="loading"></app-icon-loading>
+  <div
+    class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+    <div class="relative h-full w-8 bg-white/20"></div>
+  </div>
+</button>
+
+<button *ngIf="matStepperPrevious" type="{{action=='submit'?'submit':'button'}}"
+  class="flex gap-1 items-center {{classList}} group relative inline-flex overflow-hidden" [disabled]="disabled"
+  matStepperPrevious [ngClass]="{
+    'green-button': (action == 'submit' || action == 'button'),
+    'blue-button': action == 'primary',
+    'red-button': action == 'cancel',
+    'gray-button': action == 'default',
+    'outlined-button': action == 'secondary',
+    'opacity-75': disabled,
+    'justify-center': !icon
+  }">
+  <lucide-icon name="{{icon}}" *ngIf="icon && icon!=='google' && icon!=='wallet'"></lucide-icon>
+  <app-icon-google *ngIf="icon=='google'"></app-icon-google>
+  <img src="assets/img/icon/walletconnect.png" *ngIf="icon=='wallet'" />
+  {{title}}
+  <app-icon-loading *ngIf="loading"></app-icon-loading>
+  <div
+    class="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-100%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(100%)]">
+    <div class="relative h-full w-8 bg-white/20"></div>
+  </div>
+</button>

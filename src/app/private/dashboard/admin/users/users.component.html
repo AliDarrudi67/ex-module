@@ -1,0 +1,7 @@
+<ng-template #loginButton let-row>
+    <app-button classList="!min-w-[unset]" title="دشبرد"></app-button>
+</ng-template>
+
+<app-grid [columns]="columns"
+    [columnTemplates]="{ 'token': [loginButton] }" (newRecord)="addNewRecord()"
+    (editRecord)="editRecord($event)"></app-grid>

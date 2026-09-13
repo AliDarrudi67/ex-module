@@ -1,0 +1,30 @@
+<!-- Dialog Box -->
+<div class="rounded-2xl p-4 flex flex-col shadow-xl border border-gray-700 dark:bg-[#1E293B]">
+
+    <!-- Search Bar -->
+    <div class="relative mb-4">
+        <input type="text" placeholder="Search Tokens"
+            class="w-full rounded-full border border-[#4EC26E] px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-[#46AC68] dark:bg-transparent dark:text-white">
+        <lucide-icon name="search"
+            class="absolute left-[5px] top-1/2 transform -translate-y-1/2 dark:text-white"></lucide-icon>
+    </div>
+
+    <!-- Featured Tokens -->
+    <app-slider [slidesPerView]="3" [itemsCount]="currencies.length" [breakpoints]="breakpoints">
+        <div *ngFor="let item of currencies"
+            class="swiper-slide flex items-center gap-1 cursor-pointer border border-dark/30 rounded-xl px-3 py-1 bg-transparent transition w-full">
+            <img src="/assets/img/icon/{{item?.icon}}" alt="BTC" class="w-8 h-8" />
+            <span class="text-sm dark:text-white">{{item?.title}}</span>
+        </div>
+    </app-slider>
+
+    <!-- All Tokens List -->
+    <div
+        class="overflow-y-auto flex flex-col gap-2 max-h-[400px] scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gradient pe-2 mt-3">
+        <div class="flex items-center gap-3 px-4 py-5 rounded-[15px] cursor-pointer hover:bg-[#eee] dark:hover:bg-transparent dark:hover:border dark:hover:border-[#fff] transition"
+            *ngFor="let item of currencies">
+            <img src="/assets/img/icon/{{item?.icon}}" alt="BTC" class="w-6 h-6" />
+            <span class="dark:text-white">{{item?.title}}</span>
+        </div>
+    </div>
+</div>

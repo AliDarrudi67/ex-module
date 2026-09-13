@@ -1,0 +1,16 @@
+.app-button {
+  @apply flex items-center justify-center gap-2 w-full rounded-xl py-3.5 text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none;
+  &--primary {
+    @apply bg-amber-500 text-gray-900 hover:bg-amber-400;
+  }
+  &--secondary {
+    @apply bg-gray-800 text-gray-100 hover:bg-gray-700;
+  }
+  &--ghost {
+    @apply bg-transparent text-gray-100 border border-gray-700 hover:bg-gray-800;
+  }
+
+  &__spinner {
+    @apply w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin;
+  }
+}

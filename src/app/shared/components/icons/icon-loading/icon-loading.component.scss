@@ -1,0 +1,10 @@
+#loadingSvg {
+  fill: #333;
+}
+::ng-deep {
+  .dark {
+    #loadingSvg {
+      fill: #fff !important;
+    }
+  }
+}

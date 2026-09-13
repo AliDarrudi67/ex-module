@@ -1,0 +1,39 @@
+<app-form-container [title]="formTitle">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-[25px] p-5">
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label> مسیر</mat-label>
+            <input matInput type="text" formControlName="slug" dir="ltr" />
+            <mat-error *ngIf="form.get('slug')?.hasError('required')">
+                مسیر الزامی است
+            </mat-error>
+            <mat-error *ngIf="form.get('slug')?.hasError('invalidSlug')">
+                مسیر باید با <b>/</b> شروع شود و فقط شامل حروف، عدد، "/", "-", "_" و ":" باشد
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full custom-input">
+            <mat-label>توضیحات</mat-label>
+            <textarea rows="6" matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>متد</mat-label>
+            <mat-select matInput formControlName="method">
+                <mat-option value="post">POST</mat-option>
+                <mat-option value="get">GET</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('method')?.hasError('required')">متد اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full" *ngIf="data?.name">
+            <mat-label>وضعیت</mat-label>
+            <mat-select matInput formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-form-footer [form]="form"></app-form-footer>
+
+    </form>
+</app-form-container>

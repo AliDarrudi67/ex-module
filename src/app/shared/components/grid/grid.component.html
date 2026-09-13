@@ -1,0 +1,149 @@
+<div class="flex justify-between items-center mb-4 gap-3" dir="rtl">
+  <!-- دکمه ایجاد رکورد -->
+  <div>
+    <app-button title="" *ngIf="crudButton" icon="plus" type="green-button" classList="!min-w-[unset]"
+      (click)="newRecordMethod()"></app-button>
+  </div>
+
+  <div class="flex items-center gap-3" dir="ltr">
+    <!-- مدیریت ستونها-->
+    <app-manage-columns [isMobile]="isMobile" [columns]="columns" [tableName]="tableName" *ngIf="showColumnSetting"
+      (columnsChange)="updateVisibleColumns($event)"></app-manage-columns>
+
+    <!-- دکمه خروجی Excel -->
+    <button mat-button [matMenuTriggerFor]="excelMenu" class="flex items-center" *ngIf="export">
+      <app-icon-excel></app-icon-excel>
+    </button>
+
+    <mat-menu #excelMenu="matMenu" class="rounded-lg overflow-hidden">
+      <button mat-menu-item (click)="exportExcel('current')" class="hover:bg-gray-100">
+        <span>صفحه جاری</span>
+      </button>
+      <button mat-menu-item (click)="exportExcel('all')" class="hover:bg-gray-100">
+        <span>کل داده‌ها</span>
+      </button>
+    </mat-menu>
+
+    <!-- دکمه خروجی PDF -->
+    <button mat-button [matMenuTriggerFor]="pdfMenu" class="flex items-center" *ngIf="export">
+      <app-icon-pdf></app-icon-pdf>
+    </button>
+
+    <mat-menu #pdfMenu="matMenu" class="rounded-lg overflow-hidden">
+      <button mat-menu-item (click)="exportPDF('current')" class="hover:bg-gray-100">
+        <span>صفحه جاری</span>
+      </button>
+      <button mat-menu-item (click)="exportPDF('all')" class="hover:bg-gray-100">
+        <span>کل داده‌ها</span>
+      </button>
+    </mat-menu>
+  </div>
+</div>
+
+<div class="w-full overflow-x-auto">
+  <div class="flex flex-col" [style.min-width.px]="(visibleColumns.length + (op ? 1 : 0)) * 120">
+
+    <!-- Header -->
+    <div
+      class="flex border-b bg-[#F8FAFC] dark:bg-[#1E293B] dark:text-white font-semibold text-[14px] dark:border-b-[#1E293B] rounded-t-lg">
+      <div *ngFor="let col of visibleColumns" class="flex-1 min-w-[120px] px-4 py-3">
+        {{ col.header }}
+      </div>
+      <div *ngIf="op" class="min-w-[120px] px-4 py-3">عملیات</div>
+    </div>
+
+    <!-- Rows -->
+    <div *ngIf="loading" class="flex items-center justify-center p-3">
+      <app-icon-loading></app-icon-loading>
+    </div>
+
+    <div *ngFor="let row of data; let i = index"
+      class="flex border-t dark:border-t-[#1E293B] text-sm whitespace-nowrap transition-colors duration-200" [ngClass]="
+      {
+        'bg-white dark:bg-[#48566c] hover:bg-gray-100 dark:hover:bg-[#3f4958]':i % 2 === 0 ,
+        'bg-gray-50 dark:bg-[#19212e] hover:bg-gray-100 dark:hover:bg-[#263142]':i % 2 !== 0,
+        'rounded-b-lg': i==data.length-1
+      }
+      ">
+
+      <!-- Data cells -->
+      <div *ngFor="let col of visibleColumns" class="flex-1 flex flex-col justify-center min-w-[120px] px-4 py-3">
+        <div class="flex flex-col" [ngClass]="row[col.field]?'gap-2':''">
+          <span class="font-medium dark:text-white" [ngClass]="row[col.field]?'whitespace-break-spaces':''"
+            [ngClass]="col.field === 'status' ? mainService.getStatusClass(row['status']) : ''">
+            <span *ngIf="!col.masked">
+              <ng-container *ngIf="col.truncate; else normalField">
+                <app-tooltip text="{{ row[col.field] }}">
+                  {{ shortenAddress(row[col.field]) }}
+                </app-tooltip>
+              </ng-container>
+
+              <ng-template #normalField>
+                <ng-container *ngIf="row[col.field] === true || row[col.field] === false; else otherField">
+                  <span [ngClass]="{
+                    'text-green-600 font-semibold': row[col.field] === true,
+                    'text-red-600 font-semibold': row[col.field] === false
+                  }">
+                    {{ row[col.field] ? 'بله' : 'خیر' }}
+                  </span>
+                </ng-container>
+
+                <ng-template #otherField>
+                  {{
+                  col.field === 'status'
+                  ? mainService.getStatusTranslate(row[col.field])
+                  : col.field === 'typeCalcWithdraw'
+                  ? mainService.getTypeCalcWithdrawTranslate(row[col.field])
+                  : col.field === 'wem'
+                  ? getWemLabel(row[col.field])
+                  : col.field === 'createdAt'
+                  ? mainService.convertToJalali(row[col.field])
+                  : getNestedValue(row, col.field)
+                  }}
+                </ng-template>
+
+              </ng-template>
+            </span>
+
+            <span *ngIf="col.masked">******</span>
+          </span>
+
+          <!-- Template اختصاصی ستون -->
+          <ng-container *ngIf="columnTemplates && columnTemplates[col.field]">
+            <ng-container *ngFor="let tmpl of columnTemplates[col.field]">
+              <ng-container *ngTemplateOutlet="tmpl; context: { $implicit: row }"></ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- ستون عملیات -->
+      <div *ngIf="op" class="min-w-[120px] px-4 py-3 flex items-center gap-1 row-op">
+        <a *ngIf="!noEdit" class="text-[#333] text-[15px] font-semibold cursor-pointer" (click)="editRecordMethod(row)">
+          <lucide-icon name="square-pen" class="dark:text-white"></lucide-icon>
+        </a>
+        <a *ngIf="!noDelete" class="text-[#333] text-[15px] font-semibold cursor-pointer" (click)="deleteRecord(row)">
+          <lucide-icon name="trash" class="text-red-500"></lucide-icon>
+        </a>
+
+        <ng-container *ngIf="columnTemplates && columnTemplates['op']">
+          <ng-container *ngFor="let tmpl of columnTemplates['op']">
+            <ng-container *ngTemplateOutlet="tmpl; context: { $implicit: row }"></ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+
+    </div>
+
+    <!-- پیام عدم وجود داده -->
+    <div *ngIf="!data.length && !loading"
+      class="flex flex-col items-center justify-center text-center p-8 border border-dashed border-gray-300 dark:border-[#485464] ">
+      <app-icon-no-data class="mb-3 cursor-pointer" (click)="newRecordMethod()"></app-icon-no-data>
+      <h3 class="font-medium dark:text-white">هیچ اطلاعاتی یافت نشد!</h3>
+    </div>
+
+  </div>
+</div>
+
+<app-pagination (onPageChanged)="loadData($event)" (onNextPage)="nextPage()" (onPreviousPage)="previousPage()"
+  (onChangePageSize)="changePageSize($event)" [metaData]="metaData"></app-pagination>

@@ -1,0 +1,40 @@
+::ng-deep {
+  .mat-calendar-body-label {
+    opacity: 0 !important;
+  }
+  .mat-datepicker-content {
+    background-color: #fff !important;
+  }
+
+  .cdk-overlay-container {
+    .rtl-calendar {
+      direction: rtl;
+
+      .mat-calendar-body-cell-content.mat-focus-indicator {
+        font-family: yekan;
+      }
+    }
+
+    .ltr-calendar {
+      direction: ltr;
+
+      .mat-calendar-body-cell-content.mat-focus-indicator {
+        font-family: "Roboto", sans-serif; // فونت انگلیسی
+      }
+    }
+  }
+}
+.rtl {
+  direction: rtl;
+}
+.ltr {
+  direction: ltr;
+}
+#dateInput {
+  color: transparent !important;
+}
+.ltr-date {
+  font-family: "Roboto", sans-serif; // فونت انگلیسی
+  left: 0;
+  right: unset !important;
+}

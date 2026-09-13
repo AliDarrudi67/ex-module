@@ -1,0 +1,11 @@
+<ng-template #submenuButton let-row>
+  <app-button classList="!min-w-[unset]" title="زیرمنو" routerLink="/dashboard/definitions/menus/{{row?.id}}/sub-menu"></app-button>
+</ng-template>
+
+<app-grid
+  [columns]="columns"
+  (newRecord)="addNewRecord()"
+  (editRecord)="editRecord($event)"
+  [columnTemplates]="{ 'op': [submenuButton]}"
+  >
+</app-grid>

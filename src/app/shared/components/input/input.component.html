@@ -1,0 +1,36 @@
+<div class="app-input" [class.app-input--focused]="focused()" [class.app-input--disabled]="disabled"
+    [class.app-input--error]="errorMessage">
+    <div class="app-input__field">
+        @if (leftIcon) {
+        <lucide-icon class="app-input__icon app-input__icon--left" [img]="leftIcon" [size]="18"></lucide-icon>
+        }
+
+        <input [id]="inputId" class="app-input__control" [class.app-input__control--has-left-icon]="!!leftIcon"
+            [class.app-input__control--has-right-icon]="!!rightIcon || isPasswordField" [type]="inputType"
+            [value]="value" [disabled]="disabled" [autocomplete]="autocomplete" placeholder=" "
+            (input)="handleInput($event)" (focus)="handleFocus()" (blur)="handleBlur()" />
+
+        @if (label) {
+        <label [for]="inputId" class="app-input__label" [class.app-input__label--with-icon]="!!leftIcon"
+            [class.app-input__label--floating]="isFloating">
+            {{ label }}
+        </label>
+        }
+
+        @if (isPasswordField) {
+        <button type="button" class="app-input__icon app-input__icon--right app-input__toggle"
+            (click)="togglePasswordVisibility()" tabindex="-1">
+            <lucide-icon [img]="passwordVisible() ? eyeOffIcon : eyeIcon" [size]="18"></lucide-icon>
+        </button>
+        } @else if (rightIcon) {
+        <button type="button" class="app-input__icon app-input__icon--right" (click)="handleRightIconClick()"
+            tabindex="-1">
+            <lucide-icon [img]="rightIcon" [size]="18"></lucide-icon>
+        </button>
+        }
+    </div>
+
+    @if (errorMessage) {
+    <span class="app-input__error">{{ errorMessage }}</span>
+    }
+</div>

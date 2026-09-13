@@ -1,0 +1,7 @@
+<ng-template #activationButton let-row>
+  <app-button action="{{row?.accountId?'default':'submit'}}" title="{{row?.accountId?'جزئیات حساب':'فعال سازی'}}"
+    (click)="activeAccount(row)"></app-button>
+</ng-template>
+
+<app-grid [noEdit]="true" entity="account" [columns]="columns" [crudButton]="false" [listEndpoint]="listEndpoint"
+  [deleteEndpoint]="deleteEndpoint" [columnTemplates]="{ 'activation': [activationButton]}"></app-grid>

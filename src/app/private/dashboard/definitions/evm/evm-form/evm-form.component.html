@@ -1,0 +1,36 @@
+<app-form-container [title]="formTitle" [formLoading]="formLoading">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5"
+        [ngClass]="formLoading?'disabled-form':''">
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نام ماشین</mat-label>
+            <input matInput type="text" formControlName="slug" dir="ltr" />
+            <mat-error *ngIf="form.get('slug')?.hasError('required')">نام ماشین اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w- mb-3">
+            <mat-label>سرور</mat-label>
+            <input matInput type="text" formControlName="server" dir="ltr" />
+
+            <!-- خطای required -->
+            <mat-error *ngIf="form.get('server')?.hasError('required')">
+                سرور اجباری است
+            </mat-error>
+
+            <!-- خطای URL/IP نامعتبر -->
+            <mat-error *ngIf="form.get('server')?.hasError('invalidHttpsUrl')">
+                آدرس وارد شده معتبر نیست. باید با <strong>https://</strong> شروع شود و یک URL یا IP معتبر باشد.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full" *ngIf="evmId">
+            <mat-label>وضعیت</mat-label>
+            <mat-select matInput formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-form-footer [loading]="loading" [form]="form"></app-form-footer>
+
+    </form>
+</app-form-container>

@@ -1,0 +1,38 @@
+<form class="login bg-[#001638] p-6 rounded-xl border border-[#134797]" [formGroup]="form" (ngSubmit)="handleSubmit()"
+    dir="rtl">
+    <app-input label="نام کاربری" [leftIcon]="userIcon" formControlName="username" autocomplete="off"
+        [errorMessage]="usernameError"></app-input>
+
+    <app-input label="رمز عبور" type="password" [leftIcon]="lockIcon" formControlName="password"
+        autocomplete="new-password" [errorMessage]="passwordError"></app-input>
+
+    <div class="login__row">
+        <label class="login__remember">
+            <input type="checkbox" formControlName="rememberMe" />
+            <span>مرا به خاطر بسپار</span>
+        </label>
+        <a href="javascript:void(0)" class="login__forgot">رمز عبور خود را فراموش کرده‌اید؟</a>
+    </div>
+
+    <app-button type="primary" [icon]="arrowRightIcon" iconPosition="start">ورود</app-button>
+
+    <div class="login__divider">
+        <span class="login__divider-line"></span>
+        <span>یا</span>
+        <span class="login__divider-line"></span>
+    </div>
+
+    <app-auth-options [options]="authOptions" (optionSelected)="handleAuthOption($event)"></app-auth-options>
+
+    <div class="login__tagline">
+        <span class="login__tagline-rule"></span>
+        <div class="login__tagline-text">
+            <span>SMART ANALYSIS</span>
+            <span class="login__tagline-pipe">|</span>
+            <span>BETTER TRADES</span>
+            <span class="login__tagline-pipe">|</span>
+            <span>POWERED BY AI</span>
+        </div>
+        <span class="login__tagline-rule"></span>
+    </div>
+</form>

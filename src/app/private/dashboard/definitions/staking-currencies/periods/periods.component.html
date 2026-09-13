@@ -1,0 +1,10 @@
+<!-- <ng-template #periodsButton let-row>
+  <app-button classList="!min-w-[unset]" title="دوره ها"
+    routerLink="/dashboard/staking-currencies/{{row?.id}}/periods"></app-button>
+</ng-template> -->
+
+<app-grid 
+[columns]="columns"
+(newRecord)="addNewRecord()"
+(editRecord)="editRecord($event)"
+></app-grid>

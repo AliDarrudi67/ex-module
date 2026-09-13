@@ -1,0 +1,35 @@
+<app-form-container [title]="formTitle" [formLoading]="formLoading">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5"
+        [ngClass]="formLoading?'disabled-form':''">
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نام مخزن</mat-label>
+            <input matInput type="text" formControlName="slug" dir="ltr" />
+            <mat-error *ngIf="form.get('slug')?.hasError('required')">نام مخزن اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نماد</mat-label>
+            <input matInput type="text" formControlName="symbol" dir="ltr" />
+            <mat-error *ngIf="form.get('symbol')?.hasError('required')">نماد اجباری است</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>نوع کیف پول</mat-label>
+            <mat-select matInput formControlName="typeGitWallet">
+                <mat-option *ngFor="let item of typeGitList" [value]="item.value">{{item.text}}
+                    ({{item.value}})</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full" *ngIf="data?.gitWalletId">
+            <mat-label>وضعیت</mat-label>
+            <mat-select matInput formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-form-footer [form]="form" [loading]="loading"></app-form-footer>
+    </form>
+
+</app-form-container>

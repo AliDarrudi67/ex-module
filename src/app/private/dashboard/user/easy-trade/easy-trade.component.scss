@@ -1,0 +1,9 @@
+.method-button{
+    &.active-buy{
+       background-color: #34D399
+    }
+    &.active-sell{
+       background-color: #fa6363;
+       color:#fff
+    }
+}

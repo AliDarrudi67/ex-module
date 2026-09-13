@@ -1,0 +1,79 @@
+<div class="w-full p-16">
+  <!-- عنوان -->
+  <h2 class="text-2xl font-bold text-center mb-4 text-black dark:text-white">
+    ورود به سایت
+  </h2>
+
+  <!-- نمایش IP کاربر -->
+  <div *ngIf="userIp" class="flex justify-center mb-6" dir="rtl">
+    <div
+      class="bg-gray-100 dark:bg-transparent border border-gray-300 rounded-lg px-4 py-2 text-sm text-gray-700 dark:text-white flex items-center gap-2 shadow-sm">
+      <lucide-icon name="globe"></lucide-icon>
+      <span class="font-bold">IP شما: {{ userIp }}</span>
+    </div>
+  </div>
+
+  <!-- لینک ثبت‌نام -->
+  <p class="text-center font-bold mb-6 text-black dark:text-white">
+    اگر تاکنون ثبت نام نکرده‌اید
+    <a routerLink="/auth/register" class="text-green font-medium hover:underline cursor-pointer">از اینجا ثبت نام
+      کنید</a>
+  </p>
+
+  <form autocomplete="off" dir="rtl" class="flex flex-col gap-7" [formGroup]="form" (ngSubmit)="submitForm()">
+    <!-- شماره همراه یا ایمیل -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>شماره همراه یا ایمیل</mat-label>
+      <input matInput type="text" autocomplete="off" dir="ltr" formControlName="userName" autofocus />
+      <mat-error *ngIf="form.get('userName')?.hasError('required')">شماره همراه یا ایمیل اجباری است</mat-error>
+      <mat-error *ngIf="form.get('userName')?.hasError('userNameValidator')">لطفا شماره همراه یا ایمیل معتبر وارد
+        کنید</mat-error>
+    </mat-form-field>
+
+
+    <div class="flex flex-col gap-1">
+      <!-- رمز عبور -->
+      <mat-form-field appearance="outline" class="w-full relative" *ngIf="loginType=='password'">
+        <mat-label>رمز عبور</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" name="password" autocomplete="new-password" dir="ltr"
+          class="!pl-[25px]" formControlName="password" />
+        <mat-error *ngIf="form.get('password')?.hasError('required')">رمز عبور اجباری است</mat-error>
+        <a (click)="hide = !hide" class="absolute left-[-10px] top-[10px] cursor-pointer">
+          <lucide-icon name="eye" class="dark:text-white" *ngIf="hide"></lucide-icon>
+          <lucide-icon name="eye-off" class="dark:text-white" *ngIf="!hide"></lucide-icon>
+        </a>
+      </mat-form-field>
+
+      <app-otp-input *ngIf="loginType=='otp'"></app-otp-input>
+
+      <a class="text-green text-left block cursor-pointer" (click)="changeLoginType()">
+        <small>{{loginType=='password'?'ورود با کد یکبار مصرف':'ورود با رمز عبور'}}</small>
+      </a>
+    </div>
+
+    <!-- کپچای گوگل -->
+    <div class="flex justify-center">
+      <!-- جای کپچا -->
+      <re-captcha siteKey="6Lc5ou4rAAAAAIKcmnV0_UypBE2O1YbXwwUsWSJj"
+        (resolved)="onCaptchaResolved($event)"></re-captcha>
+    </div>
+
+    <!-- دکمه ورود -->
+    <app-button action="submit" [loading]="loading" title="ورود" classList="w-full"></app-button>
+
+    <div class="flex flex-col gap-3">
+      <a routerLink="/auth/forget-password" class="text-gray dark:text-white text-right block">
+        <small>رمز عبور را فراموش کردم</small>
+      </a>
+      <hr />
+
+      <!-- دکمه ورود با گوگل -->
+      <app-button action="secondary" [loading]="googleLoading" title="ورود با گوگل" classList="w-full" icon="google"
+        (click)="loginByGoogle()"></app-button>
+
+      <!-- دکمه ورود با کانکت ولت -->
+      <app-button [loading]="walletConnectService.loading" [disabled]="walletConnectService.loading" action="secondary"
+        title="ورود با کانکت ولت" icon="wallet" classList="w-full" (click)="connectWallet()"></app-button>
+    </div>
+  </form>
+</div>

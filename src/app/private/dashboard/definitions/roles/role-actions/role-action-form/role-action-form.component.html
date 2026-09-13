@@ -1,0 +1,17 @@
+<app-form-container [title]="formTitle">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+        <app-async-select [placeholder]="'نقش عملیاتی'" [direction]="'rtl'"
+            (onSelectItem)="form.value.actionRoleId=$event" [endpoint]="actionRolesPagination" valueField="actionRoleId"
+            textField="slug"></app-async-select>
+
+        <mat-form-field appearance="outline" class="w-full" *ngIf="roleActionId">
+            <mat-label>وضعیت</mat-label>
+            <mat-select matInput formControlName="status">
+                <mat-option *ngFor="let item of statusList" [value]="item.value">{{item.text}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-form-footer [form]="form"></app-form-footer>
+    </form>
+
+</app-form-container>

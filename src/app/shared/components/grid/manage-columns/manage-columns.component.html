@@ -1,0 +1,43 @@
+<div class="relative w-full">
+  <!-- دکمه تنظیمات ستون‌ها -->
+  <button (click)="togglePanel($event)"
+    class="flex items-center gap-1 bg-emerald-600 text-white px-3 py-1.5 rounded-lg shadow hover:bg-emerald-700 transition-all">
+    <lucide-icon class="text-[20px]" name="columns-3"></lucide-icon>
+    <span>{{isMobile?'':'ستون‌ها'}}</span>
+  </button>
+
+  <!-- پنل انتخاب ستون‌ها -->
+  <div *ngIf="showColumns" (click)="$event.stopPropagation()" dir="rtl"
+    class="absolute top-11 left-0 w-64 bg-white dark:bg-[#1E293B] border border-gray-200 dark:border-[#485464] rounded-xl shadow-lg z-50 p-3 animate-fadeIn">
+    <div class="flex justify-between items-center border-b pb-2 mb-2">
+      <div class="flex items-center gap-2">
+        <lucide-icon class="animate-pulse cursor-pointer text-yellow-500" (click)="hideAllColumns()" name="star"></lucide-icon>
+        <span class="font-semibold text-gray-700 text-sm dark:text-white">تنظیمات ستون‌ها</span>
+      </div>
+      <button (click)="showColumns = false" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <lucide-icon class="text-[20px]" name="circle-x"></lucide-icon>
+      </button>
+    </div>
+
+    <div class="flex flex-col gap-1 max-h-[300px] overflow-y-auto border-b pb-2">
+      <label *ngFor="let col of columns; let i=index"
+        class="flex items-center justify-between p-1.5 rounded hover:bg-gray-50 dark:hover:bg-[#334155] cursor-pointer transition-all">
+        <div class="flex items-center gap-2">
+          <input type="checkbox" class="w-4 h-4 text-[#059669] border-gray-300 rounded focus:ring-[#059669]"
+            [(ngModel)]="col.visible" (click)="$event.stopPropagation()" (change)="toggleColumn()" />
+          <span class="text-gray-700 text-sm dark:text-white">{{ col.header }}</span>
+        </div>
+
+        <button *ngIf="col.visible" (click)="toggleMask(col)"
+          class="text-gray-400 hover:text-amber-500 transition-colors"
+          [title]="col.masked ? 'نمایش مقدار واقعی' : 'پنهان‌سازی مقدار'">
+          <lucide-icon class="text-[18px]" name="{{ col.masked ? 'eye-off' : 'eye' }}"></lucide-icon>
+        </button>
+
+      </label>
+    </div>
+
+    <app-button action="cancel" (click)="showColumns = false" classList="!w-full mt-3" title="بستن">
+    </app-button>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="flex items-center justify-center p-4" dir="rtl">
+    <div class="bg-white shadow-lg rounded-xl p-6 w-full border-t-8 border-[#34d399]">
+
+        <div *ngIf="params" class="space-y-2">
+            <div class="flex flex-col gap-3 mb-3" *ngIf="!pictureError">
+                <img [src]="params.picture" (error)="onImageError($event)" class="rounded mx-auto" />
+                <hr />
+            </div>
+
+            <div class="flex justify-between gap-5">
+                <span class="font-semibold text-gray-700">صادرکننده:</span>
+                <span class="text-gray-900">{{ params.iss }}</span>
+            </div>
+
+            <div class="flex justify-between gap-5">
+                <span class="font-semibold text-gray-700">نام:</span>
+                <span class="text-gray-900">{{ params.given_name }}</span>
+            </div>
+
+            <div class="flex justify-between gap-5">
+                <span class="font-semibold text-gray-700">نام خانوادگی:</span>
+                <span class="text-gray-900">{{ params.family_name }}</span>
+            </div>
+
+            <div class="flex justify-between gap-5">
+                <span class="font-semibold text-gray-700">ایمیل:</span>
+                <span class="text-gray-900">{{ params.email }}</span>
+            </div>
+
+            <div class="flex justify-between gap-5" *ngIf="params.referralCode && params.referralCode!=='undefined'">
+                <span class="font-semibold text-gray-700">کد دعوت:</span>
+                <span class="text-gray-900">{{ params.referralCode }}</span>
+            </div>
+
+        </div>
+
+        <div class="mt-6 flex items-center justify-between gap-5">
+            <app-button (click)="goToDashboard()" title="ورود به پنل"></app-button>
+            <app-button action="cancel" routerLink="/auth/login" title="انصراف"></app-button>
+        </div>
+
+    </div>
+</div>

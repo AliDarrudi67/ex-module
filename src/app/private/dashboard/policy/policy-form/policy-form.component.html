@@ -1,0 +1,65 @@
+<app-form-container [title]="formTitle">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+
+    <!-- ارز -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>ارز</mat-label>
+      <mat-select matInput formControlName="asset">
+        <mat-option value="BTC">BTC</mat-option>
+        <mat-option value="ETH">ETH</mat-option>
+        <mat-option value="USDT">USDT</mat-option>
+        <mat-option value="BNB">BNB</mat-option>
+        <mat-option value="ADA">ADA</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('asset')?.hasError('required')">ارز اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- شبکه -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>شبکه</mat-label>
+      <mat-select matInput formControlName="network">
+        <mat-option value="Bitcoin">Bitcoin</mat-option>
+        <mat-option value="Ethereum">Ethereum</mat-option>
+        <mat-option value="TRC20">TRC20</mat-option>
+        <mat-option value="BSC">BSC</mat-option>
+        <mat-option value="Cardano">Cardano</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('network')?.hasError('required')">شبکه اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- حداقل واریزی -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>حداقل واریزی</mat-label>
+      <input matInput formControlName="minDeposit" dir="ltr" />
+      <mat-error *ngIf="form.get('minDeposit')?.hasError('required')">حداقل واریزی اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- فی شبکه -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>فی شبکه</mat-label>
+      <input matInput formControlName="networkFee" dir="ltr" />
+      <mat-error *ngIf="form.get('networkFee')?.hasError('required')">فی شبکه اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- حداقل موجودی -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>حداقل موجودی</mat-label>
+      <input matInput formControlName="minBalance" dir="ltr" />
+      <mat-error *ngIf="form.get('minBalance')?.hasError('required')">حداقل موجودی اجباری است</mat-error>
+    </mat-form-field>
+
+    <!-- سرعت -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>سرعت</mat-label>
+      <mat-select matInput formControlName="speed">
+        <mat-option value="High">زیاد</mat-option>
+        <mat-option value="Medium">متوسط</mat-option>
+        <mat-option value="Low">کم</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('speed')?.hasError('required')">سرعت اجباری است</mat-error>
+    </mat-form-field>
+
+    <app-form-footer [form]="form"></app-form-footer>
+
+  </form>
+</app-form-container>

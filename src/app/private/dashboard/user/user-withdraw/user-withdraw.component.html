@@ -1,0 +1,101 @@
+<div class="rounded-2xl flex flex-col gap-6 max-w-xl">
+
+    <!-- سطر 1: عنوان برداشت -->
+    <div class="flex items-center gap-2">
+        <app-icon-arrow-right></app-icon-arrow-right>
+        <span class="text-dark font-bold text-lg dark:text-white">برداشت USDT</span>
+        <app-icon-arrow-down></app-icon-arrow-down>
+    </div>
+
+    <!-- سطر 2: انتخاب شبکه و باکس info -->
+    <div class="flex flex-col w-full gap-4 items-start relative">
+        <mat-form-field appearance="outline" class="w-full" dir="rtl">
+            <mat-label>انتخاب شبکه</mat-label>
+            <mat-select>
+                <mat-option value="1">
+                    <div class="flex flex-col w-full">
+                        <span>BNB Smart Chain (BEP-20 / BSC)</span>
+                        <span class="text-sm text-gray-300">کارمزد: 1 USDT</span>
+                    </div>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <app-help-box id="helpBox"></app-help-box>
+
+    </div>
+
+    <!-- سطر 3: جزئیات برداشت -->
+    <div class="bg-white dark:bg-[#1E293B] dark:text-white rounded-xl p-4 flex flex-col gap-2">
+        <div class="flex justify-between items-center border-b-2 border-[#7ed7b9] pb-2">
+            <span>USDT</span>
+            <span class="text-[24px] font-bold">0.46</span>
+        </div>
+
+        <span>تومان ......</span>
+
+        <div class="flex justify-between text-sm">
+            <span class="font-bold">برداشت همه موجودی: 1.46 USDT</span>
+        </div>
+
+        <div class="flex justify-between mt-1 items-center">
+            <span>کارمزد انتقال</span>
+            <div class="flex flex-col gap-1 items-end">
+                <span class="text-gray-400">1 USDT</span>
+                <span dir="ltr">≈108,823 IRT</span>
+            </div>
+        </div>
+
+        <div class="flex justify-between mt-1 items-center">
+            <span>مبلغ نهایی</span>
+            <div class="flex flex-col gap-1 items-end">
+                <span class="text-gray-400">0.46 USDT</span>
+                <span dir="ltr">≈50,059 IRT</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- سطر 4: آدرس مقصد -->
+    <div class="flex flex-col gap-3">
+        <a href="#" class="text-green-600 text-sm">لیست مخاطبین</a>
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>آدرس مقصد</mat-label>
+            <input matInput>
+            <app-icon-scan class="absolute left-1 top-1/2 transform -translate-y-1/2"></app-icon-scan>
+            <app-icon-paste class="absolute left-[35px] top-1/2 transform -translate-y-1/2"></app-icon-paste>
+        </mat-form-field>
+    </div>
+
+    <!-- سطر 5: اینپوت اضافی -->
+    <mat-form-field appearance="outline" class="w-full">
+        <mat-label>ممو</mat-label>
+        <input matInput>
+        <app-icon-paste class="absolute left-1 top-1/2 transform -translate-y-1/2"></app-icon-paste>
+    </mat-form-field>
+
+    <!-- سطر 6: دکمه درخواست برداشت -->
+    <app-button action="submit" title="درخواست برداشت USDT" classList="!w-full !p-3 !justify-center"
+        class="w-full flex-1">
+    </app-button>
+</div>
+
+<div class="max-w-7xl mt-5">
+    <!-- سطر 8: کامپوننت گرید -->
+    <div class="flex justify-between">
+        <div class="flex items-center gap-2">
+            <span class="text-sm lg:text-[16px] dark:text-white">تاریخچه برداشت‌ها</span>
+            <app-icon-history></app-icon-history>
+        </div>
+        <div class="flex items-center gap-2">
+            <app-button title="" classList="!justify-center !min-w-[unset] !w-[40px] !h-[40px]">
+                <app-icon-refresh></app-icon-refresh>
+            </app-button>
+            <app-button title="تاریخچه برداشت ها" action="submit" classList="!justify-center text-sm lg:text-[16px]"
+                dir="ltr">
+                <app-icon-clock-history></app-icon-clock-history>
+            </app-button>
+        </div>
+    </div>
+    <app-grid [columns]="columns" [showBreadcrumb]="false" [crudButton]="false" [export]="false"
+        [showColumnSetting]="false"></app-grid>
+</div>

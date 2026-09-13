@@ -1,0 +1,12 @@
+<div class="flex justify-center gap-3 p-6">
+    <button *ngFor="let item of buttons" dir="rtl" (click)="selectMethod(item.id)" class=" flex items-center justify-center gap-2 bg-white text-gray-800 rounded-xl shadow px-5 py-4 
+           transition-all duration-300 ease-in-out hover:shadow-lg min-w-[70px]" [class.w-44]="isExpanded(item.id)">
+        <app-icon-google *ngIf="item.id=='google'" class="transition-transform duration-300"></app-icon-google>
+        <app-icon-mobile *ngIf="item.id=='mobile'" class="transition-transform duration-300"></app-icon-mobile>
+        <img *ngIf="item.id=='wallet'" [src]="item.icon" [alt]="item.label" class="transition-transform duration-300" />
+        <span class="font-medium whitespace-nowrap transition-all duration-300"
+            [ngClass]="isExpanded(item.id)?'text-sm':'text-[0px] w-[0px] absolute'">
+            {{ item.label }}
+        </span>
+    </button>
+</div>

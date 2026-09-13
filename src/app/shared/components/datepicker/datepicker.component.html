@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline" class="relative w-full">
+  <mat-label>{{label}}</mat-label>
+  <input id="dateInput" matInput readonly [matDatepicker]="picker" (click)="picker.open()" [min]="minDate"
+    [max]="maxDate" (dateChange)="onDateChange($event)">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker [calendarHeaderComponent]="customHeader" [class.rtl-calendar]="isJalali"
+    (opened)="onOpened()"></mat-datepicker>
+  <span (click)="picker.open()" class="absolute top-[12px] right-0 dark:text-white"
+    [ngClass]="isJalali?'':'ltr-date'">{{selectedDate}}</span>
+</mat-form-field>

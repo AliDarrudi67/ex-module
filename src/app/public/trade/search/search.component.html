@@ -1,0 +1,76 @@
+<div class="border border-[#484848] rounded-lg p-2 w-full">
+    <!-- Search box -->
+    <div class="relative mb-4">
+        <input type="text" placeholder="Search"
+            class="border border-[#484848] w-full bg-[#161516] text-gray-400 placeholder-[#707A8A] rounded-lg py-2 pl-9 pr-3 focus:outline-none" />
+        <img src="assets/img/icon/search-black.png" class="absolute left-3 top-1/2 -translate-y-1/2" />
+    </div>
+
+    <!-- Slider menu -->
+    <div class="relative"> <!-- فاصله چپ و راست -->
+        <app-slider [arrowSize]="20" [slidesPerView]="5" [itemsCount]="cryptos.length" class="z-[2]">
+            <div class="swiper-slide text-gray-400 text-sm px-4 py-2 rounded-md cursor-pointer hover:text-white"
+                *ngFor="let item of cryptos">
+                <p>
+                    {{item}}
+                </p>
+            </div>
+        </app-slider>
+    </div>
+
+
+    <!-- Table -->
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="border-b border-gray-700">
+                <tr class="text-gray-400 text-left">
+                    <th class="pb-2">
+                        <div class="flex items-center space-x-1">
+                            <span>Pair</span>
+                            <div class="flex flex-col items-center justify-center">
+                                <img src="assets/img/icon/upArrowWhite.png" />
+                                <img src="assets/img/icon/downArrow.png" />
+                            </div>
+                        </div>
+                    </th>
+                    <th class="pb-2">
+                        <div class="flex items-center space-x-1">
+                            <span>Last Price</span>
+                            <div class="flex flex-col items-center justify-center">
+                                <img src="assets/img/icon/downArrow.png" class="rotate-180" />
+                                <img src="assets/img/icon/downArrow.png" />
+                            </div>
+                        </div>
+                    </th>
+                    <th class="pb-2">
+                        <div class="flex items-center space-x-1">
+                            <span>24h Chg</span>
+                            <div class="flex flex-col items-center justify-center">
+                                <img src="assets/img/icon/downArrow.png" class="rotate-180" />
+                                <img src="assets/img/icon/downArrow.png" />
+                            </div>
+                            <img src="assets/img/icon/unknown.png" />
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample row -->
+                <tr class="hover:bg-gray-800/40" *ngFor="let item of [].constructor(12)">
+                    <td class="py-2">
+                        <div class="flex items-center space-x-2">
+                            <img src="assets/img/icon/star-trade.png" />
+                            <span class="text-white">BTC/USDT</span>
+                            <span class="bg-gray-700 text-white text-xs px-1.5 py-0.5 rounded">5x</span>
+                        </div>
+                    </td>
+                    <td class="py-2 text-white">67,123.21</td>
+                    <td class="py-2 text-green-500">+1.52%</td>
+                    <td class="py-2 text-right text-gray-500">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

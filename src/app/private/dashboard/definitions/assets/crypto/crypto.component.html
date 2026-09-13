@@ -1,0 +1,8 @@
+<ng-template #speedButton let-row>
+  <app-button classList="!min-w-[unset]" title="سرعت ها"
+    routerLink="/dashboard/definitions/assets/{{assetId}}/crypto/{{row?.cryptoId}}/speed"></app-button>
+</ng-template>
+
+<app-grid entity="crypto" [columns]="columns" (newRecord)="addNewRecord()" (editRecord)="editRecord($event)"
+  [listEndpoint]="listEndpoint" [deleteEndpoint]="deleteEndpoint"
+  [columnTemplates]="{ 'speed': [speedButton]}"></app-grid>

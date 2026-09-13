@@ -1,0 +1,66 @@
+<section class="px-4 lg:px-8 pt-[10px]">
+    <div class="w-full py-3 bg-[#f8fafc] dark:bg-[#1E293B] dark:border-[#485464] dark:border rounded-lg pl-[10px]">
+        <div class="flex items-center gap-5 justify-between pr-2">
+            <lucide-icon name="menu" class="dark:text-white lg:opacity-0" (click)="toggleSidebar()"></lucide-icon>
+            <div class="flex items-center gap-5 justify-end">
+                <app-change-mode
+                    class="dark:border-[#485464] dark:border rounded-full p-1 shadow-md bg-white dark:bg-transparent dark:border-[#485464] dark:border transform transition-transform duration-200 hover:scale-105"></app-change-mode>
+                <a
+                    class="shadow-md bg-white dark:bg-transparent dark:border-[#485464] dark:border rounded-full p-1 cursor-pointer transform transition-transform duration-200 hover:scale-105">
+                    <lucide-icon [size]="20" [strokeWidth]="1.5" name="circle-user"
+                        class="dark:text-white"></lucide-icon>
+                </a>
+
+                <div class="relative">
+                    <!-- آیکون زنگ -->
+                    <a (click)="toggleNotifications()"
+                        class="block w-[31px] h-[31px] shadow-md bg-white dark:bg-transparent dark:border-[#485464] dark:border rounded-full p-1 cursor-pointer transform transition-transform duration-200 hover:scale-105">
+                        <lucide-icon [size]="20" [strokeWidth]="1.5" name="bell" class="dark:text-white"></lucide-icon>
+                    </a>
+
+                    <!-- بج قرمز مستقل -->
+                    <span *ngIf="notifications.length"
+                        class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+
+                    <!-- Dropdown -->
+                    <div *ngIf="showDropdown" @dropdownAnimation (clickOutside)="showDropdown = false"
+                        class="absolute left-0 mt-2 w-80 bg-white dark:bg-[#1E293B] dark:border-[#485464] dark:border rounded-lg shadow-lg z-50">
+
+                        <div class="p-2 border-b border-gray-200 dark:border-gray-700 font-medium dark:text-white">
+                            اعلان‌ها
+                        </div>
+
+                        <ul class="max-h-64 overflow-y-auto">
+                            <li *ngIf="notifications.length === 0"
+                                class="px-3 py-4 text-center text-gray-500 dark:text-gray-400">
+                                اعلانی وجود ندارد
+                            </li>
+
+                            <li *ngFor="let notification of notifications"
+                                class="px-3 py-2 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+                                <div class="text-sm font-medium" *ngIf="notification.title">{{ notification.title }}
+                                </div>
+                                <div class="text-xs text-gray-700 dark:text-gray-300">{{ notification.body }}</div>
+                                <div class="text-[10px] text-gray-400 dark:text-gray-500">{{ notification.ts |
+                                    date:'short' }}</div>
+                            </li>
+                        </ul>
+
+                        <div *ngIf="notifications.length > 0"
+                            class="p-2 text-center text-xs text-gray-500 dark:text-gray-400 cursor-pointer hover:underline"
+                            (click)="clearNotifications()">
+                            پاک کردن همه
+                        </div>
+
+                    </div>
+                </div>
+
+                <a class="shadow-md bg-white dark:bg-transparent dark:border-[#485464] dark:border rounded-full  p-1 cursor-pointer transform transition-transform duration-200 hover:scale-105"
+                    (click)="logout()">
+                    <lucide-icon [size]="20" [strokeWidth]="1.5" name="log-out" class="dark:text-white"></lucide-icon>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,21 @@
+<div class="form-container border shadow-md bg-white dark:bg-[#1E293B] overflow-hidden dark:border-[#334155]">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between bg-gray-100 dark:bg-[#1E293B] dark:border-b-[#334155] p-4 border-b"
+        dir="rtl">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-white">{{ title }}</h2>
+        <button type="button" (click)="onCancel()" class="text-gray-500 hover:text-gray-700 transition-colors">
+            <!-- ایکون ضربدر ساده -->
+            <lucide-icon class="dark:text-white" name="{{isInDialog?'circle-x':'move-left'}}"></lucide-icon>
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-md">
+        <div *ngIf="formLoading" class="flex items-center justify-center p-3">
+            <app-icon-loading></app-icon-loading>
+        </div>
+        <ng-content></ng-content>
+    </div>
+
+</div>

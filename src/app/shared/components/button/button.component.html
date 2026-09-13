@@ -1,0 +1,16 @@
+<button class="app-button" [ngClass]="['app-button--' + type, classList]" [disabled]="disabled || loading">
+    @if (loading) {
+    <span class="app-button__spinner"></span>
+    } @else {
+    @if (icon && iconPosition === 'start') {
+    <lucide-icon [img]="icon" [size]="18"></lucide-icon>
+    }
+    @if (title) {
+    <span class="app-button__label">{{ title }}</span>
+    }
+    <ng-content></ng-content>
+    @if (icon && iconPosition === 'end') {
+    <lucide-icon [img]="icon" [size]="18"></lucide-icon>
+    }
+    }
+</button>

@@ -1,0 +1,24 @@
+<form [formGroup]="referralCodeForm" class=" flex flex-col gap-5 mt-2">
+    <mat-form-field appearance="outline" class="w-full relative">
+        <mat-label>کد دعوت (اختیاری)</mat-label>
+        <input matInput formControlName="referralCode" class="!pl-[30px]" dir="ltr"
+            (keydown.enter)="submitReferralCodeForm()" />
+        <lucide-icon class="absolute left-0 cursor-pointer dark:text-white" (click)="pasteReferralCode()"
+            name="clipboard-paste"></lucide-icon>
+    </mat-form-field>
+
+    <mat-checkbox color="primary" formControlName="acceptTerms" class="leading-6">
+        <a href="/policies" target="_blank" class="text-green hover:underline">
+            شرایط و قوانین
+        </a>
+        وبسایت را مطالعه کرده و قبول می‌کنم.
+    </mat-checkbox>
+
+    <div class="flex justify-between mt-2" dir="ltr">
+        <app-button classList="w-full lg:w-auto" action="submit" (click)="submitReferralCodeForm()"
+            title="بعدی"></app-button>
+        <app-button action="default" title="قبلی" [matStepperPrevious]="true"
+            *ngIf="registerMethod=='mobile'"></app-button>
+    </div>
+
+</form>

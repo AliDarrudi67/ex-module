@@ -1,0 +1,47 @@
+<app-form-container [title]="formTitle">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" dir="rtl" class="flex flex-col gap-9 p-5">
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>طول دوره (روز)</mat-label>
+      <input matInput numericOnly formControlName="duration" />
+      <mat-error *ngIf="form.get('duration')?.hasError('required')">طول دوره اجباری است</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>تعداد پرداخت</mat-label>
+      <input matInput numericOnly formControlName="paymentCount" />
+      <mat-error *ngIf="form.get('paymentCount')?.hasError('required')">تعداد پرداخت اجباری است</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>سود کل پرداخت</mat-label>
+      <input matInput numericOnly formControlName="totalProfit" />
+      <mat-error *ngIf="form.get('totalProfit')?.hasError('required')">سود کل پرداخت اجباری است</mat-error>
+    </mat-form-field>
+
+    <div *ngIf="totalProfitError" class="text-red-500 text-sm mt-1">
+      جمع سودهای پرداختی با سود کل برابر نیست!
+    </div>
+    <div *ngIf="totalDaysError" class="text-red-500 text-sm mt-1">
+      جمع روزهای پرداخت با طول دوره برابر نیست!
+    </div>
+
+
+    <div *ngIf="incomes.length > 0" formArrayName="incomes" class="flex flex-col gap-3 mt-3">
+      <div *ngFor="let income of incomes.controls; let i = index" [formGroupName]="i"
+        class="flex gap-3 items-end border rounded-xl p-3">
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>پرداخت شماره {{ i + 1 }} - بعد از چند روز؟</mat-label>
+          <input matInput numericOnly formControlName="dayOffset" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>سود پرداخت شماره {{ i + 1 }}</mat-label>
+          <input matInput numericOnly formControlName="profit" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <app-form-footer [form]="form"></app-form-footer>
+  </form>
+</app-form-container>

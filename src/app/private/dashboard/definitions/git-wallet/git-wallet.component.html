@@ -1,0 +1,13 @@
+<ng-template #destinationButton let-row>
+  <app-button classList="!min-w-[unset]" title="مقصد"
+    routerLink="/dashboard/definitions/git-wallet/{{row?.gitWalletId}}/transfer"></app-button>
+</ng-template>
+
+<ng-template #assetButton let-row>
+  <app-button classList="!min-w-[unset]" title="Asset"
+    routerLink="/dashboard/definitions/git-wallet/{{row?.gitWalletId}}/git-asset-wallet"></app-button>
+</ng-template>
+
+<app-grid [columns]="columns" (newRecord)="addNewRecord()" (editRecord)="editRecord($event)" entity="gitWallet"
+  listEndpoint="{{listEndpoint}}" deleteEndpoint="{{deleteEndpoint}}"
+  [columnTemplates]="{ 'destination': [destinationButton],'asset': [assetButton]}"></app-grid>
